@@ -1,0 +1,73 @@
+.row {
+    background-color: #1c454a;
+    min-height: 150vh;
+    padding: 12rem 3rem;
+  }
+  section {
+    background-color: #fff;
+    padding: 16px;
+    border-radius: 8px;
+    display: flex;
+    width: 80%;
+    margin: auto;
+  }
+  section .column {
+    flex: 50%;
+  }
+  /* 1st Column */
+  .form {
+    margin: 2rem 3rem;
+  }
+  .form h1 {
+    text-align: center;
+    margin-bottom: 16px;
+    font-size: 40px;
+  }
+  form {
+    width: 60%;
+    margin: auto;
+  }
+  form .form {
+    width: 100%;
+  }
+  form .form input,
+  button {
+    width: 100%;
+    height: 40px;
+    padding: 8px 16px;
+    border-radius: 8px;
+    border: 2px solid #1c454a;
+    margin: 4px 0px;
+  }
+  .form a {
+    color: #1c454a;
+    text-decoration: none;
+    font-weight: 600;
+  }
+  .form button {
+    background: #1c454a;
+    color: #fff;
+    outline: none;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  .form button:hover {
+    opacity: 0.9;
+  }
+  .routinglink {
+    margin-top: 12px;
+    font-size: 18px;
+    font-weight: 600;
+    text-align: center;
+  }
+  .routinglink a {
+    color: #1c454a;
+  }
+  /* 2 Column */
+  .image {
+    background-image: url("../../../../assets/features-icon-3.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+  }

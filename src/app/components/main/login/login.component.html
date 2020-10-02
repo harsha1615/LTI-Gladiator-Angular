@@ -1,1 +1,32 @@
-<p>login works!</p>
+<div class="row">
+    <section>
+      <div class="column form">
+        <h1>Login</h1>
+        <div class="login-form">
+          <form (ngSubmit)="loginCheck()">
+            <div class="form">
+              <label for="Email"><b>Email:</b></label>
+              <input type="text"  placeholder="Enter Email" name="email" [(ngModel)]="login.email" />
+            </div>
+            <div class="form">
+              <label for="pwd"><b>Password:</b></label>
+              <input type="password"  placeholder="Enter password" name="password" [(ngModel)]="login.password" />
+              <a href="#">Forgot Password ?</a>
+            </div>
+            <div class="form">
+              <button type="submit">Login</button>   
+            </div>
+            <div class="form">
+              <div class="routinglink">
+                <h4>
+                  New User?
+                  <a routerLink="/register" >Register here</a>     
+                </h4>
+              </div>
+            </div>
+          </form>  
+        </div>
+      </div>
+      <div class="column image"></div>
+    </section>
+  </div>
