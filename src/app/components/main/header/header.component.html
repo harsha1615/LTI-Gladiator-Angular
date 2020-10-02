@@ -1,10 +1,31 @@
-<p>header works!</p>
 
-<div>
-    <a routerLink="/home">Home</a>
-    <a routerLink="/products">Products</a>
-    <a routerLink="/register">Register</a>
-    <a routerLink="/login">Login</a>
-    <a routerLink="/user/dashboard">User</a>
-    <a routerLink="/admin/dashboard">Admin</a>
-</div>
+<nav>
+    <ul class="left">
+      <li>
+        <a class="logo" routerLink="/home" routerLinkActive="active">
+          Securitas Funds
+        </a>
+      </li>
+    </ul>
+    <ul class="right">
+      <li>
+        <a routerLink="/home" routerLinkActive="active">Home</a>
+      </li>
+      <li>
+        <a href="/products" routerLinkActive="active">Products</a>
+      </li>
+      <li>
+        <a routerLink="/register" routerLinkActive="active">Register</a>
+      </li>
+      <li>
+        <a class="log-btn" routerLink="/login" routerLinkActive="active">Login</a>
+      </li>
+      <li>
+        <a routerLink="/user/dashboard" routerLinkActive="active">User</a>
+      </li>
+      <li>
+        <a routerLink="/admin/dashboard" routerLinkActive="active">Admin</a>
+      </li>
+    </ul>
+  </nav>
+  
