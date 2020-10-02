@@ -1,1 +1,52 @@
-<p>dashboard works!</p>
+<div *ngIf="userProfile">
+    <div class="user-profile ui-card details">
+        <strong>USER DETAILS</strong>
+        <div class="field">
+            <label>Name : </label>
+            <span> {{userProfile.name}} </span>
+        </div>
+        <div class="field">
+            <label>Username : </label>
+            <span> {{userProfile.username}} </span>
+        </div>
+        <div class="field">
+            <label>Phone : </label>
+            <span> {{userProfile.phone}} </span>
+        </div>
+        <div class="field">
+            <label>Email : </label>
+            <span> {{userProfile.email}} </span>
+        </div>
+        <div class="field">
+            <label>Address : </label>
+            <span> {{userProfile.address}} </span>
+        </div>
+    </div>
+    <div class="emi-card ui-card details">
+        <strong>CARD DETAILS</strong>
+        <div class="field">
+            <label>CARD NO : </label>
+            <span> {{userProfile.emiCard.cardNo}} </span>
+        </div>
+        <div class="field">
+            <label>CARD TYPE : </label>
+            <span> {{userProfile.emiCard.cardType }} </span>
+        </div>
+        <div *ngIf="userProfile.emiCard.activated">
+            <div class="field">
+                <label>VALIDITY : </label>
+                <span> {{ userProfile.emiCard.validity }} </span>
+            </div>
+            <div class="field">
+                <label>Remaining Balance : </label>
+                <span> {{ userProfile.emiCard.balance }} / {{ userProfile.emiCard.limit }} </span>
+            </div>
+        </div>
+        <div *ngIf="!userProfile.emiCard.activated">
+            <span>Card Not Activated</span>
+            <div *ngIf="!userProfile.paidForCard">
+                <button (click)="payForCard()">PAY TO ACTIVATE</button>
+            </div>
+        </div>
+    </div>
+</div>

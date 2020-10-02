@@ -15,7 +15,7 @@ export interface UserProfile {
   phone: string;
   address: string;
   paidForCard: boolean;
-  card: UserEmiCard;
+  emiCard: UserEmiCard;
 }
 
 export interface UserEmiCard {
@@ -32,43 +32,55 @@ export interface UserEmiCard {
   providedIn: 'root',
 })
 export class UserService {
-  isLoggedin$: Observable<boolean>;
-  private _isLoggedIn: BehaviorSubject<boolean>;
+  private _userId: number;
 
-  userProfile: UserProfile = {
-    id: 1001,
-    name: 'Harsha',
-    username: 'harsha',
-    email: 'harsha@lti.com',
-    phone: '9876543210',
-    address: 'mahape, mumbai',
-    paidForCard: true,
-    card: {
-      id: 10000,
-      cardType: 'GOLD',
-      cardNo: '123456781234',
-      activated: false,
-      validity: '23-10-2020',
-      balance: 15000,
-      limit: 20000,
-    },
-  };
+  userProfile$: Observable<UserProfile>;
+  private _userProfile: BehaviorSubject<UserProfile>;
 
   constructor(private router: Router, private http: HttpClient) {
-    this._isLoggedIn = new BehaviorSubject<boolean>(true);
-    this.isLoggedin$ = this._isLoggedIn.asObservable();
+    this._userId = 1;
+
+    this._userProfile = new BehaviorSubject<UserProfile>(null);
+    this.userProfile$ = this._userProfile.asObservable();
+
+    if(this._userId != null){
+      this.fetchProfile();
+    }
   }
 
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): boolean | Observable<boolean> | Promise<boolean> {
-    var loggedin: boolean = this._isLoggedIn.getValue();
-    if (loggedin) {
+    if (this._userId != null) {
       return true;
     }
     this.router.navigate(['login']);
     return false;
   }
 
+  getProfile(): Observable<UserProfile> {
+    return this.userProfile$;
+  }
+
+  fetchProfile() {
+    let id = this._userId;
+    let url = 'http://localhost:8080/user/profile/?id=' + id;
+    this.http.get<UserProfile>(url).subscribe((data) => this.setUserProfile(data));
+  }
+
+  payForCard() {
+    let id = this._userId;
+    let url = 'http://localhost:8080/user/pay-for-card';
+    let body = { uid: id, pay: true };
+    this.http.post<UserProfile>(url, body).subscribe((data) => this.setUserProfile(data));
+  }
+
+  private setUserProfile(data:UserProfile) {
+    if (data.id) {
+      this._userProfile.next(data);
+    } else {
+      console.log(data);
+    }
+  }
 }
