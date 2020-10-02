@@ -6,6 +6,7 @@ import {
 } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { Observable, BehaviorSubject } from 'rxjs';
+import { User } from '../components/main/register/register.component';
 
 export interface UserProfile {
   id: number;
@@ -43,7 +44,7 @@ export class UserService {
     this._userProfile = new BehaviorSubject<UserProfile>(null);
     this.userProfile$ = this._userProfile.asObservable();
 
-    if(this._userId != null){
+    if (this._userId != null) {
       this.fetchProfile();
     }
   }
@@ -66,21 +67,30 @@ export class UserService {
   fetchProfile() {
     let id = this._userId;
     let url = 'http://localhost:8080/user/profile/?id=' + id;
-    this.http.get<UserProfile>(url).subscribe((data) => this.setUserProfile(data));
+    this.http
+      .get<UserProfile>(url)
+      .subscribe((data) => this.setUserProfile(data));
   }
 
   payForCard() {
     let id = this._userId;
     let url = 'http://localhost:8080/user/pay-for-card';
     let body = { uid: id, pay: true };
-    this.http.post<UserProfile>(url, body).subscribe((data) => this.setUserProfile(data));
+    this.http
+      .post<UserProfile>(url, body)
+      .subscribe((data) => this.setUserProfile(data));
   }
 
-  private setUserProfile(data:UserProfile) {
+  private setUserProfile(data: UserProfile) {
     if (data.id) {
       this._userProfile.next(data);
     } else {
       console.log(data);
     }
+  }
+
+  register(user: User): Observable<any> {
+    let url = 'http://localhost:8080/register';
+    return this.http.post(url, user);
   }
 }
