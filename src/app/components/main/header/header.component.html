@@ -1,31 +1,41 @@
-
 <nav>
-    <ul class="left">
-      <li>
-        <a class="logo" routerLink="/home" routerLinkActive="active">
-          Securitas Funds
-        </a>
-      </li>
-    </ul>
-    <ul class="right">
-      <li>
-        <a routerLink="/home" routerLinkActive="active">Home</a>
-      </li>
-      <li>
-        <a href="/products" routerLinkActive="active">Products</a>
-      </li>
+  <ul class="left">
+    <li>
+      <a class="logo" routerLink="/home" routerLinkActive="active">
+        Securitas Funds
+      </a>
+    </li>
+  </ul>
+  <ul class="right">
+    <li>
+      <a routerLink="/home" routerLinkActive="active">Home</a>
+    </li>
+    <li>
+      <a routerLink="/products" routerLinkActive="active">Products</a>
+    </li>
+    <div *ngIf="!isUserLoggedIn && !isAdminLoggedIn">
       <li>
         <a routerLink="/register" routerLinkActive="active">Register</a>
       </li>
       <li>
-        <a class="log-btn" routerLink="/login" routerLinkActive="active">Login</a>
+        <a routerLink="/login" routerLinkActive="active">Login</a>
       </li>
+    </div>
+    <div *ngIf="isUserLoggedIn">
       <li>
         <a routerLink="/user/dashboard" routerLinkActive="active">User</a>
       </li>
       <li>
+        <a (click)="userLogout()" routerLink="/login">Logout</a>
+      </li>
+    </div>
+    <div *ngIf="isAdminLoggedIn">
+      <li>
         <a routerLink="/admin/dashboard" routerLinkActive="active">Admin</a>
       </li>
-    </ul>
-  </nav>
-  
+      <li>
+        <a (click)="adminLogout()" routerLink="/login">Logout</a>
+      </li>
+    </div>
+  </ul>
+</nav>

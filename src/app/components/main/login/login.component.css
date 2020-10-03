@@ -50,11 +50,14 @@
     outline: none;
     font-size: 16px;
     font-weight: 600;
+    opacity: 0.8;
+  }
+
+  .form button:enabled{
+    opacity: 1;
     cursor: pointer;
   }
-  .form button:hover {
-    opacity: 0.9;
-  }
+
   .routinglink {
     margin-top: 12px;
     font-size: 18px;

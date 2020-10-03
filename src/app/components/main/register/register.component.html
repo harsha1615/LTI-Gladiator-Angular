@@ -1,274 +1,204 @@
 <div class="row">
-    <section>
-      <div class="column registration">
-        <h1>Registration</h1>
-        <form [formGroup]="registerForm" (ngSubmit)="register()">
-          <div class="form-group">
-            <div class="form">
-              <label for="name"><b>Name</b></label>
-              <input
-                type="text"
-                placeholder="Enter Name"
-                formControlName="name"
-              />
-              <div
-                *ngIf="
+  <section>
+    <div class="column registration">
+      <h1>Registration</h1>
+      <form [formGroup]="registerForm" (ngSubmit)="register()">
+        <div class="form-group">
+          <div class="form">
+            <label for="name"><b>Name</b></label>
+            <input type="text" placeholder="Enter Name" formControlName="name" />
+            <div *ngIf="
                   registerForm.get('name').invalid &&
                   (registerForm.get('name').dirty ||
                     registerForm.get('name').touched)
-                "
-                class="alert alert-danger"
-              >
-                <div *ngIf="registerForm.get('name').errors.required">
-                  Name is required.
-                </div>
-                <div *ngIf="registerForm.get('name').errors.minlength">
-                  Name must be at least 6 characters long.
-                </div>
+                " class="alert alert-danger">
+              <div *ngIf="registerForm.get('name').errors.required">
+                Name is required.
+              </div>
+              <div *ngIf="registerForm.get('name').errors.minlength">
+                Name must be at least 6 characters long.
               </div>
             </div>
-            <div class="form">
-              <label for="uname"><b>Username</b></label>
-              <input
-                type="text"
-                placeholder="Enter Username"
-                formControlName="username"
-              />
-              <div
-                *ngIf="
+          </div>
+          <div class="form">
+            <label for="uname"><b>Username</b></label>
+            <input type="text" placeholder="Enter Username" formControlName="username" />
+            <div *ngIf="
                   registerForm.get('username').invalid &&
                   (registerForm.get('username').dirty ||
                     registerForm.get('username').touched)
-                "
-                class="alert alert-danger"
-              >
-                <div *ngIf="registerForm.get('username').errors.required">
-                  User is required.
-                </div>
-                <div *ngIf="registerForm.get('username').errors.minlength">
-                  Username must be at least 6 characters long.
-                </div>
+                " class="alert alert-danger">
+              <div *ngIf="registerForm.get('username').errors.required">
+                User is required.
+              </div>
+              <div *ngIf="registerForm.get('username').errors.minlength">
+                Username must be at least 6 characters long.
               </div>
             </div>
           </div>
-          <div class="form-group">
-            <div class="form">
-              <label for="phoneNo"><b>Phone No.</b></label>
-              <input
-                type="text"
-                placeholder="Enter Mobile Number"
-                formControlName="phoneNo"
-              />
-              <div
-                *ngIf="
+        </div>
+        <div class="form-group">
+          <div class="form">
+            <label for="phoneNo"><b>Phone No.</b></label>
+            <input type="text" placeholder="Enter Mobile Number" formControlName="phoneNo" />
+            <div *ngIf="
                   registerForm.get('phoneNo').invalid &&
                   (registerForm.get('phoneNo').dirty ||
                     registerForm.get('phoneNo').touched)
-                "
-                class="alert alert-danger"
-              >
-                <div *ngIf="registerForm.get('phoneNo').errors.required">
-                  Mobile No. is required.
-                </div>
-                <div *ngIf="registerForm.get('phoneNo').errors.patternValidator">
-                  Enter a valid Phone No. Format
-                </div>
+                " class="alert alert-danger">
+              <div *ngIf="registerForm.get('phoneNo').errors.required">
+                Mobile No. is required.
+              </div>
+              <div *ngIf="registerForm.get('phoneNo').errors.patternValidator">
+                Enter a valid Phone No. Format
               </div>
             </div>
           </div>
-          <div class="form-group">
-            <div class="form">
-              <label for="address"><b>Address</b></label>
-              <input
-                type="text"
-                placeholder="Enter Address"
-                formControlName="address"
-              />
-              <div
-                *ngIf="
+        </div>
+        <div class="form-group">
+          <div class="form">
+            <label for="address"><b>Address</b></label>
+            <input type="text" placeholder="Enter Address" formControlName="address" />
+            <div *ngIf="
                   registerForm.get('address').invalid &&
                   (registerForm.get('address').dirty ||
                     registerForm.get('address').touched)
-                "
-                class="alert alert-danger"
-              >
-                <div *ngIf="registerForm.get('address').errors.required">
-                  Address is required
-                </div>
+                " class="alert alert-danger">
+              <div *ngIf="registerForm.get('address').errors.required">
+                Address is required
               </div>
             </div>
           </div>
-          <div class="form-group">
-            <div class="form">
-              <label for="email"><b>Email Address</b></label>
-              <input
-                type="email"
-                placeholder="Enter Email Address"
-                formControlName="email"
-              />
-              <div
-                *ngIf="
+        </div>
+        <div class="form-group">
+          <div class="form">
+            <label for="email"><b>Email Address</b></label>
+            <input type="email" placeholder="Enter Email Address" formControlName="email" />
+            <div *ngIf="
                   registerForm.get('email').invalid &&
                   (registerForm.get('email').dirty ||
                     registerForm.get('email').touched)
-                "
-                class="alert alert-danger"
-              >
-                <div *ngIf="registerForm.get('email').errors.required">
-                  Email is required.
-                </div>
-                <div *ngIf="registerForm.get('email').errors">
-                  Invalid Email Format
-                </div>
-                <div *ngIf="registerForm.get('email').errors.patternValidator">
-                  Enter a valid Email Format
-                </div>
+                " class="alert alert-danger">
+              <div *ngIf="registerForm.get('email').errors.required">
+                Email is required.
+              </div>
+              <div *ngIf="registerForm.get('email').errors">
+                Invalid Email Format
+              </div>
+              <div *ngIf="registerForm.get('email').errors.patternValidator">
+                Enter a valid Email Format
               </div>
             </div>
           </div>
-          <div class="form-group">
-            <div class="form">
-              <label for="password"><b>Password</b></label>
-              <input
-                type="password"
-                placeholder="Enter Password"
-                formControlName="password"
-              />
-              <div
-                *ngIf="
+        </div>
+        <div class="form-group">
+          <div class="form">
+            <label for="password"><b>Password</b></label>
+            <input type="password" placeholder="Enter Password" formControlName="password" />
+            <div *ngIf="
                   registerForm.get('password').invalid &&
                   (registerForm.get('password').dirty ||
                     registerForm.get('password').touched)
-                "
-                class="alert alert-danger"
-              >
-                <div *ngIf="registerForm.get('password').errors.required">
-                  password is required.
-                </div>
-                <div *ngIf="registerForm.get('password').errors.minlength">
-                  Password must be at least 8 characters long.
-                </div>
+                " class="alert alert-danger">
+              <div *ngIf="registerForm.get('password').errors.required">
+                password is required.
+              </div>
+              <div *ngIf="registerForm.get('password').errors.minlength">
+                Password must be at least 8 characters long.
               </div>
             </div>
-            <div class="form">
-              <label for="confirmPassword"><b>Confirm Password</b></label>
-              <input
-                type="password"
-                placeholder="Enter confirmPassword"
-                formControlName="confirmPassword"
-              />
-              <div
-                *ngIf="
+          </div>
+          <div class="form">
+            <label for="confirmPassword"><b>Confirm Password</b></label>
+            <input type="password" placeholder="Enter confirmPassword" formControlName="confirmPassword" />
+            <div *ngIf="
                   registerForm.get('confirmPassword').invalid &&
                   (registerForm.get('confirmPassword').dirty ||
                     registerForm.get('confirmPassword').touched)
-                "
-                class="alert alert-danger"
-              >
-                <div *ngIf="registerForm.get('confirmPassword').errors.required">
-                  Confirm Password is required.
-                </div>
-                <div *ngIf="registerForm.get('confirmPassword').errors.minlength">
-                  Confirm Password must be at least 8 characters long.
-                </div>
+                " class="alert alert-danger">
+              <div *ngIf="registerForm.get('confirmPassword').errors.required">
+                Confirm Password is required.
+              </div>
+              <div *ngIf="registerForm.get('confirmPassword').errors.minlength">
+                Confirm Password must be at least 8 characters long.
               </div>
             </div>
           </div>
-          <div class="radio-form">
-            <label class="cardLabel" for="cardType"><b>Card Type:</b></label>
-            <div class="form-group">
-              <div class="form">
-                <input type="radio" formControlName="cardType" value="GOLD" />
-                <b>GOLD</b>
-              </div>
-              <div class="form">
-                <input type="radio" formControlName="cardType" value="TITANIUM" />
-                <b>TITANIUM</b>
-              </div>
-            </div>
-          </div>
+        </div>
+        <div class="radio-form">
+          <label class="cardLabel" for="cardType"><b>Card Type:</b></label>
           <div class="form-group">
             <div class="form">
-              <label for="user.bank.name"><b>Bank</b></label>
-              <input
-                type="text"
-                placeholder="Enter Bank"
-                formControlName="bankName"
-              />
-              <div
-                *ngIf="
+              <input type="radio" formControlName="cardType" value="GOLD" />
+              <b>GOLD</b>
+            </div>
+            <div class="form">
+              <input type="radio" formControlName="cardType" value="TITANIUM" />
+              <b>TITANIUM</b>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="form">
+            <label for="user.bank.name"><b>Bank</b></label>
+            <input type="text" placeholder="Enter Bank" formControlName="bankName" />
+            <div *ngIf="
                   registerForm.get('bankName').invalid &&
                   (registerForm.get('bankName').dirty ||
                     registerForm.get('bankName').touched)
-                "
-                class="alert alert-danger"
-              >
-                <div *ngIf="registerForm.get('bankName').errors.required">
-                  Bank is required
-                </div>
+                " class="alert alert-danger">
+              <div *ngIf="registerForm.get('bankName').errors.required">
+                Bank is required
               </div>
             </div>
           </div>
-          <div class="form-group">
-            <div class="form">
-              <label for="ifsc"><b>I.F.S.C.</b></label>
-              <input
-                type="text"
-                placeholder="Enter I.F.S.C."
-                formControlName="ifsc"
-              />
-              <div
-                *ngIf="
+        </div>
+        <div class="form-group">
+          <div class="form">
+            <label for="ifsc"><b>I.F.S.C.</b></label>
+            <input type="text" placeholder="Enter I.F.S.C." formControlName="ifsc" />
+            <div *ngIf="
                   registerForm.get('ifsc').invalid &&
                   (registerForm.get('ifsc').dirty ||
                     registerForm.get('ifsc').touched)
-                "
-                class="alert alert-danger"
-              >
-                <div *ngIf="registerForm.get('ifsc').errors.required">
-                  I.F.S.C. is required
-                </div>
+                " class="alert alert-danger">
+              <div *ngIf="registerForm.get('ifsc').errors.required">
+                I.F.S.C. is required
               </div>
             </div>
           </div>
-          <div class="form-group">
-            <div class="form">
-              <label for="accountNo"><b>Savings Account No.</b></label>
-              <input
-                type="text"
-                placeholder="Enter Savings Account No."
-                formControlName="accountNo"
-              />
-              <div
-                *ngIf="
+        </div>
+        <div class="form-group">
+          <div class="form">
+            <label for="accountNo"><b>Savings Account No.</b></label>
+            <input type="text" placeholder="Enter Savings Account No." formControlName="accountNo" />
+            <div *ngIf="
                   registerForm.get('accountNo').invalid &&
                   (registerForm.get('accountNo').dirty ||
                     registerForm.get('accountNo').touched)
-                "
-                class="alert alert-danger"
-              >
-                <div *ngIf="registerForm.get('accountNo').errors.required">
-                  Savings Account No. is required
-                </div>
+                " class="alert alert-danger">
+              <div *ngIf="registerForm.get('accountNo').errors.required">
+                Savings Account No. is required
               </div>
             </div>
           </div>
-          <div class="form-group">
-            <div class="form reg-btn">
-              <button type="submit">Register</button>
-            </div>
-            <div class="form reset-btn">
-              <button type="submit">Reset</button>
-            </div>
+        </div>
+        <div class="form-group">
+          <div class="form reset-btn">
+            <button type="reset">Reset</button>
           </div>
-          <div class="routinglink">
-            <h4>
-              Already a member?
-              <a routerLink="/login" routerLinkActive="active">Login</a>
-            </h4>
+          <div class="form reg-btn">
+            <button type="submit" [disabled]="!registerForm.valid || formSubmitted">Register</button>
           </div>
-        </form>
-      </div>
-      <div class="column register-image"></div>
-    </section>
-  </div>
+        </div>
+        <div class="routinglink">
+          <h4>
+            Already a member?
+            <a routerLink="/login">Login</a>
+          </h4>
+        </div>
+      </form>
+    </div>
+    <div class="column register-image"></div>
+  </section>
+</div>

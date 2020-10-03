@@ -1,1 +1,14 @@
-<p>admin-dashboard works!</p>
+<div *ngIf="adminProfile">
+    <div class="user-profile ui-card details">
+        <strong>ADMIN DETAILS</strong>
+        <div class="field">
+            <label>Name : </label>
+            <span> {{adminProfile.name}} </span>
+        </div>
+        <div class="field">
+            <label>Username : </label>
+            <span> {{adminProfile.username}} </span>
+        </div>
+    </div>
+</div>
+<button (click)="logout()">logout</button>

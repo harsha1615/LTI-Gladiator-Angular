@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { UserService } from '../../../services/user.service';
+import { Router } from '@angular/router';
+import { AuthService, UserSignup } from '../../../services/auth.service';
 
 @Component({
   selector: 'app-register',
@@ -8,39 +9,41 @@ import { UserService } from '../../../services/user.service';
   styleUrls: ['./register.component.css'],
 })
 export class RegisterComponent implements OnInit {
-  user: User;
+  user: UserSignup;
   registerForm: FormGroup;
+  formSubmitted: boolean;
 
-  constructor(private fb: FormBuilder, private userService: UserService) {}
+  constructor(
+    private fb: FormBuilder,
+    private authService: AuthService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.createRegisterForm();
+    this.formSubmitted = false;
   }
 
   createRegisterForm(): void {
     this.registerForm = this.fb.group({
       name: ['', [Validators.required, Validators.minLength(6)]],
       username: ['', [Validators.required]],
-
       phoneNo: [
         '',
         [Validators.required, Validators.pattern('[1-9]{1}[0-9]{9}')],
       ],
       address: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
-
       password: ['', [Validators.required, Validators.minLength(8)]],
       confirmPassword: ['', [Validators.required, Validators.minLength(8)]],
-
       cardType: ['', Validators.required],
-
       bankName: ['', Validators.required],
       accountNo: ['', Validators.required],
       ifsc: ['', Validators.required],
     });
   }
+
   register() {
-    console.log(this.registerForm.value);
     console.log(this.registerForm);
     if (this.registerForm.valid) {
       this.user = {
@@ -50,7 +53,6 @@ export class RegisterComponent implements OnInit {
         address: this.registerForm.get('address').value,
         email: this.registerForm.get('email').value,
         password: this.registerForm.get('password').value,
-
         emiCard: { cardType: this.registerForm.get('cardType').value },
         bank: {
           name: this.registerForm.get('bankName').value,
@@ -58,28 +60,18 @@ export class RegisterComponent implements OnInit {
           accountNo: this.registerForm.get('accountNo').value,
         },
       };
+      if (!this.formSubmitted) {
+        this.formSubmitted = true;
+        this.authService.register(this.user).subscribe((res) => {
+          if (res.success) {
+            this.router.navigate(['login']);
+          } else {
+            console.log(res.message);
+            alert(res.message);
+            this.formSubmitted = false;
+          }
+        });
+      }
     }
-
-    this.userService.register(this.user).subscribe((response) => {
-      console.log(response);
-    });
   }
-}
-export interface User {
-  name: string;
-  username: string;
-  phoneNo: string;
-  address: string;
-  email: string;
-  password: string;
-
-  emiCard: {
-    cardType: string;
-  };
-
-  bank: {
-    name: string;
-    ifsc: string;
-    accountNo: string;
-  };
 }

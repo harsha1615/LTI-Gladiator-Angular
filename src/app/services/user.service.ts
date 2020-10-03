@@ -6,28 +6,7 @@ import {
 } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { Observable, BehaviorSubject } from 'rxjs';
-import { User } from '../components/main/register/register.component';
-
-export interface UserProfile {
-  id: number;
-  name: string;
-  username: string;
-  email: string;
-  phone: string;
-  address: string;
-  paidForCard: boolean;
-  emiCard: UserEmiCard;
-}
-
-export interface UserEmiCard {
-  id: number;
-  cardType: string;
-  cardNo: string;
-  activated: boolean;
-  validity: string;
-  balance: number;
-  limit: number;
-}
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root',
@@ -38,15 +17,18 @@ export class UserService {
   userProfile$: Observable<UserProfile>;
   private _userProfile: BehaviorSubject<UserProfile>;
 
-  constructor(private router: Router, private http: HttpClient) {
-    this._userId = 1;
-
+  constructor(private router: Router, private http: HttpClient, private authService:AuthService) {
     this._userProfile = new BehaviorSubject<UserProfile>(null);
     this.userProfile$ = this._userProfile.asObservable();
-
-    if (this._userId != null) {
-      this.fetchProfile();
-    }
+    this.authService.isLoggedIn$.subscribe((loggedIn) => {
+      if(loggedIn){
+        this._userId = this.authService.getUserId();
+        this.fetchProfile();
+      }else{
+        this._userId = null;
+        this.removeUserProfile();
+      }
+    });
   }
 
   canActivate(
@@ -89,8 +71,29 @@ export class UserService {
     }
   }
 
-  register(user: User): Observable<any> {
-    let url = 'http://localhost:8080/register';
-    return this.http.post(url, user);
+  private removeUserProfile(){
+    this._userProfile.next(null);
   }
+
+}
+
+export interface UserProfile {
+  id: number;
+  name: string;
+  username: string;
+  email: string;
+  phone: string;
+  address: string;
+  paidForCard: boolean;
+  emiCard: UserEmiCard;
+}
+
+export interface UserEmiCard {
+  id: number;
+  cardType: string;
+  cardNo: string;
+  activated: boolean;
+  validity: string;
+  balance: number;
+  limit: number;
 }
