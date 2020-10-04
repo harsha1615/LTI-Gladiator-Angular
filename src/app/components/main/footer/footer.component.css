@@ -1,48 +1,49 @@
 p {
-    line-height: 20px;
-    margin-bottom: 20px;
+  line-height: 20px;
+  margin-bottom: 20px;
 }
 h5 {
-    font-size: 15px;
-    color: #0D0A0A;
-    font-weight: bold;
-    text-transform: uppercase;
+  font-size: 15px;
+
+  font-weight: bold;
+  text-transform: uppercase;
 }
 a {
-    text-decoration: none;
-    color: #0D0A0A;
+  text-decoration: none;
+  color: #fff;
 }
 a:hover {
-    color: #02b8dd;
+  color: #02b8dd;
 }
 .wrapper {
-    margin: 0 auto;
-    padding: 0 10px;
-    width: 940px;
+  margin: 0 auto;
+  padding: 0 10px;
+  width: 940px;
+  color: #fff;
 }
 footer {
-    padding: 60px 0;
-    background-color: #1c454a;
-    font-family: 'Crete Round', serif;
-    font-weight: bold;
+  padding: 60px 0;
+  background-color: #1c454a;
+  font-family: "Crete Round", serif;
+  font-weight: bold;
 }
 #footer-info {
-    width: 380px;
-    float: left;
-    margin-top: 10px;
+  width: 380px;
+  float: left;
+  margin-top: 10px;
 }
 #footer-links {
-    width: 520px;
-    float: right;
+  width: 520px;
+  float: right;
 }
 #footer-links ul {
-    width: 150px;
-    float: left;
-    margin-left: 20px;
+  width: 150px;
+  float: left;
+  margin-left: 20px;
 }
 #footer-links ul li {
-    margin: 10px 0;
+  margin: 10px 0;
 }
 .clear {
-    clear: both;
+  clear: both;
 }

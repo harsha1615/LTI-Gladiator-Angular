@@ -1,41 +1,43 @@
 nav {
-    background-color: #1c454a;
-    display: flex;
-    padding: 1.5rem 3rem;
-    font-family: 'Crete Round', serif;
-    font-weight: bold;
-  }
-  .logo {
-    text-decoration: none;
-    color: #fff;
-  }
-  .left li {
-    list-style: none;
-  }
-  .left li a {
-    font-size: 30px;
-  }
-  .right {
-    display: flex;
-    margin-left: auto;
-    justify-content: center;
-  }
-  .right li {
-    list-style-type: none;
-    margin: 8px 1rem;
-  }
-  .right li a {
-    text-decoration: none;
-    color: #fff;
-    font-size: 16px;
-    font-weight: normal;
-    padding: 6px 12px;
-    border: 2px solid #1c454a;
-    outline: none;
-  }
-  .right li a:hover {
-    background-color: #fff;
-    color: #1c454a;
-    border-radius: 12px;
-  }
-  
+  background-color: #1c454a;
+  display: flex;
+  padding: 1.5rem 3rem;
+  font-family: "Crete Round", serif;
+  font-weight: bold;
+}
+.logo {
+  text-decoration: none;
+  color: #fff;
+}
+.left li {
+  list-style: none;
+}
+.left li a {
+  font-size: 30px;
+}
+.right {
+  display: flex;
+  margin-left: auto;
+  justify-content: center;
+}
+.right li {
+  list-style-type: none;
+  margin: 8px 1rem;
+}
+.right li a {
+  text-decoration: none;
+  color: #fff;
+  font-size: 16px;
+  font-weight: normal;
+  padding: 6px 12px;
+  border: 2px solid #1c454a;
+  outline: none;
+}
+.right li a:hover {
+  background-color: #fff;
+  color: #1c454a;
+  border-radius: 12px;
+}
+ul div {
+  display: flex;
+}

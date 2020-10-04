@@ -18,10 +18,8 @@ export class ProductsService {
   constructor(private http: HttpClient) {
     this.fetchProducts();
   }
-  getProduct(pid: number) {
-    console.log(pid);
-    let product = this.products.find((product) => product.id == pid);
-    console.log(product);
+  getProduct(pid: number): Product {
+    return this.products.find((product) => product.id == pid);
   }
   getProducts(): Observable<Array<Product>> {
     let url = 'http://localhost:8080/product';

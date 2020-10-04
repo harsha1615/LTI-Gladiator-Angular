@@ -1,37 +1,23 @@
-
-    <div class="small-container">
-        <div class="row row-2">
-            <h2>All Products</h2>
-            <select>
-                <option>Default Sorting</option>
-                <option>Sort By Popularity</option>
-                <option>Sort By Price</option>
-                <option>Sort By Rating</option>
-                <option>Sort By Sale</option>
-
-            </select>
-        </div>
-        <div *ngFor="let product of products" class="row">
-            <div class="col-4">
-                <img src={{product.image}}>
-                <a routerLink="/products/{{product.id}}" routerLinkActive="active"><h4>{{product.name}}</h4></a>
-                <div class="rating">
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star-half-o"></i>
-                    <i class="fa fa-star-o"></i>
-                </div>
-                <p>${{product.cost}}</p>
-            </div>
-        </div>
-        <div class="page-btn">
-            <span>1</span>
-            <span>2</span>
-            <span>3</span>
-            <span>4</span>
-            <span>&#8594;</span>
-        </div>
+<div class="small-container">
+  <div class="row row-2">
+    <h2>All Products</h2>
+  </div>
+  <div *ngFor="let product of products" class="row">
+    <div class="col-4">
+      <img src="{{ product.image }}" />
+      <a routerLink="/products/{{ product.id }}" routerLinkActive="active"
+        ><h4>{{ product.name }}</h4></a
+      >
+      <p>${{ product.cost }}</p>
     </div>
+  </div>
+  <div class="page-btn">
+    <span>1</span>
+    <span>2</span>
+    <span>3</span>
+    <span>4</span>
+    <span>&#8594;</span>
+  </div>
+</div>
 
 <!-----Footer----->
