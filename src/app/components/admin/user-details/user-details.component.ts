@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, Input, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { AdminService } from 'src/app/services/admin.service';
 import { UserProfile } from 'src/app/services/user.service';
@@ -11,14 +10,14 @@ import { UserProfile } from 'src/app/services/user.service';
 })
 export class UserDetailsComponent implements OnInit {
 
+  @Input('uid') uid:number; 
   userProfile:UserProfile;
   private userProfileSubscription : Subscription;
 
-  constructor(private adminService:AdminService, private route:ActivatedRoute) { }
+  constructor(private adminService:AdminService) { }
 
   ngOnInit(): void {
-    let uid = +this.route.snapshot.params['id']; 
-    this.userProfileSubscription = this.adminService.getUser(uid).subscribe( (data) => {
+    this.userProfileSubscription = this.adminService.getUser(this.uid).subscribe( (data) => {
       this.userProfile = data;
     });
   }

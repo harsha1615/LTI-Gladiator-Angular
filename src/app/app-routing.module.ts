@@ -13,7 +13,6 @@ import { PurchaseDetailComponent } from './components/user/purchase-detail/purch
 
 import { AdminDashboardComponent } from './components/admin/admin-dashboard/admin-dashboard.component';
 import { UsersListComponent } from './components/admin/users-list/users-list.component';
-import { UserDetailsComponent } from './components/admin/user-details/user-details.component';
 import { EditProductComponent } from './components/admin/edit-product/edit-product.component';
 
 import { UserService } from './services/user.service';
@@ -56,20 +55,8 @@ const routes: Routes = [
     children: [
       { path: '', component: AdminDashboardComponent },
       { path: 'dashboard', component: AdminDashboardComponent },
-      {
-        path: 'users',
-        children: [
-          { path: '', component: UsersListComponent },
-          { path: ':id', component: UserDetailsComponent },
-        ],
-      },
-      {
-        path: 'products',
-        children: [
-          { path: '', component: PageNotFoundComponent },
-          { path: ':id', component: EditProductComponent },
-        ],
-      },
+      { path: 'users', component: UsersListComponent },
+      { path: 'products', component: EditProductComponent },
     ],
   },
   { path: '**', component: PageNotFoundComponent },

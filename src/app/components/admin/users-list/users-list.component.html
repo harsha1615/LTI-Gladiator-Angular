@@ -1,21 +1,26 @@
-
-<div>
-    <table>
-        <tr>
-            <th>S.No</th>
-            <th>Name</th>
-            <th>username</th>
-            <th>Paid For Card</th>
-            <th>Activated</th>
-            <th>View User</th>
-        </tr>
-        <tr *ngFor="let user of users; index as i">
-            <td>{{i+1}}</td>
-            <td>{{user.name}}</td>
-            <td>{{user.username}}</td>
-            <td>{{user.paidForCard}}</td>
-            <td>{{user.emiCard.activated}}</td>
-            <td><button><a routerLink="/admin/users/{{user.id}}">View</a></button></td>
-        </tr>
-    </table>
+<div *ngIf="!selectedUid">
+    <div *ngIf="users">
+        <table>
+            <tr>
+                <th>S.No</th>
+                <th>Name</th>
+                <th>username</th>
+                <th>Paid For Card</th>
+                <th>Activated</th>
+                <th>View User</th>
+            </tr>
+            <tr *ngFor="let user of users; index as i">
+                <td>{{i+1}}</td>
+                <td>{{user.name}}</td>
+                <td>{{user.username}}</td>
+                <td>{{user.paidForCard}}</td>
+                <td>{{user.emiCard.activated}}</td>
+                <td><button (click)="selectUser(user.id)">View</button></td>
+            </tr>
+        </table>
+    </div>
+</div>
+<div *ngIf="selectedUid">
+    <a (click)="unselectUser()">back</a>
+    <app-user-details [uid]="selectedUid"></app-user-details>
 </div>

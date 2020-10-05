@@ -132,10 +132,31 @@ export class AdminService {
       }
     });
   }
+
+  saveProduct(product:AdminProduct):Observable<any>{
+    let url = "http://localhost:8080/admin/products";
+    return this.http.post(url, product);
+  }
+
+  getProduct(pid:number):Observable<AdminProduct>{
+    let url = "http://localhost:8080/admin/products?pid="+pid;
+    return this.http.get<AdminProduct>(url);
+  }
+
 }
 
 export interface AdminProfile {
   id: number;
   name: string;
   username: string;
+}
+
+export interface AdminProduct {
+  id:number;
+  name:string;
+  image:string;
+  description:string;
+  originalPrice:number;
+  profitPercent:number;
+  finalPrice:number;
 }

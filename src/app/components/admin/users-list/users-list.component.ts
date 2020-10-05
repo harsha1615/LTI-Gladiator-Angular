@@ -11,7 +11,9 @@ import { UserProfile } from 'src/app/services/user.service';
 export class UsersListComponent implements OnInit,OnDestroy {
 
   users:Array<UserProfile>;
-  usersListSubscription:Subscription;
+  selectedUid:number;
+
+  private usersListSubscription:Subscription;
 
   constructor(private adminService:AdminService) { }
 
@@ -24,5 +26,13 @@ export class UsersListComponent implements OnInit,OnDestroy {
   ngOnDestroy():void{
     this.usersListSubscription.unsubscribe();
   }
-  
+
+  selectUser(uid:number){
+    this.selectedUid = uid;
+  }
+
+  unselectUser(){
+    this.selectedUid = null;
+  }
+
 }

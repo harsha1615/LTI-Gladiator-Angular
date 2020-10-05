@@ -1,1 +1,100 @@
-<p>edit-product works!</p>
+<div>
+    <input type="number" [(ngModel)]="pid">
+    <button (click)="getProduct()">GET PRODUCT</button>
+</div>
+<div *ngIf="!productValid">
+    Invalid Product ID
+</div>
+
+<div *ngIf="productLoaded">
+    <form [formGroup]="productForm" (ngSubmit)="submit()">
+
+        <div class="form">
+            <label for="name"><b>Name</b></label>
+            <input type="text" placeholder="Enter Name" name="name" formControlName="name" />
+            <div *ngIf="
+                  productForm.get('name').invalid &&
+                  (productForm.get('name').dirty ||
+                    productForm.get('name').touched)
+                " class="alert alert-danger">
+                <div *ngIf="productForm.get('name').errors.required">
+                    Name is required.
+                </div>
+            </div>
+        </div>
+        <div class="form">
+            <label for="image"><b>Image URL</b></label>
+            <input type="text" placeholder="Enter Image URL" name="image" formControlName="image" />
+            <div *ngIf="
+                  productForm.get('image').invalid &&
+                  (productForm.get('image').dirty ||
+                    productForm.get('image').touched)
+                " class="alert alert-danger">
+                <div *ngIf="productForm.get('image').errors.required">
+                    Image URL is required.
+                </div>
+            </div>
+        </div>
+        <div class="form">
+            <label for="description"><b>Description</b></label>
+            <input type="textarea" placeholder="Enter Description" name="description" formControlName="description" />
+            <div *ngIf="
+                  productForm.get('description').invalid &&
+                  (productForm.get('description').dirty ||
+                    productForm.get('description').touched)
+                " class="alert alert-danger">
+                <div *ngIf="productForm.get('description').errors.required">
+                    Description is required.
+                </div>
+            </div>
+        </div>
+        <div class="form">
+            <label for="originalPrice"><b>Name</b></label>
+            <input type="text" placeholder="Enter Original Price" name="originalPrice"
+                formControlName="originalPrice" />
+            <div *ngIf="
+                  productForm.get('originalPrice').invalid &&
+                  (productForm.get('originalPrice').dirty ||
+                    productForm.get('originalPrice').touched)
+                " class="alert alert-danger">
+                <div *ngIf="productForm.get('originalPrice').errors.required">
+                    Original Price is required.
+                </div>
+            </div>
+        </div>
+        <div class="form">
+            <label for="profitPercent"><b>Name</b></label>
+            <input type="text" placeholder="Enter Profit Price" name="profitPercent" formControlName="profitPercent" />
+            <div *ngIf="
+                  productForm.get('profitPercent').invalid &&
+                  (productForm.get('profitPercent').dirty ||
+                    productForm.get('profitPercent').touched)
+                " class="alert alert-danger">
+                <div *ngIf="productForm.get('profitPercent').errors.required">
+                    Profit Percent is required.
+                </div>
+            </div>
+        </div>
+        <div class="form">
+            <label for="finalPrice"><b>Name</b></label>
+            <input type="text" placeholder="Enter Final Price" name="finalPrice" formControlName="finalPrice" />
+            <div *ngIf="
+                  productForm.get('finalPrice').invalid &&
+                  (productForm.get('finalPrice').dirty ||
+                    productForm.get('finalPrice').touched)
+                " class="alert alert-danger">
+                <div *ngIf="productForm.get('finalPrice').errors.required">
+                    Final Price is required.
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="form reset-btn">
+                <button type="reset">Reset</button>
+            </div>
+            <div class="form reg-btn">
+                <button type="submit" [disabled]="!productForm.valid || formSubmitted">Register</button>
+            </div>
+        </div>
+    </form>
+</div>
