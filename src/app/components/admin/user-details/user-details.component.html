@@ -1,1 +1,5 @@
-<p>user-details works!</p>
+<app-user-profile [profile]="userProfile"></app-user-profile>
+
+<div *ngIf="!userProfile.emiCard.activated" class="activate-btn">
+    <button (click)="activateCard()">ACTIVATE EMI CARD</button>
+</div>

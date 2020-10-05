@@ -7,6 +7,7 @@ import {
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { UserLogin, AuthStatus } from './auth.service';
+import { UserProfile } from './user.service';
 
 @Injectable({
   providedIn: 'root',
@@ -20,16 +21,23 @@ export class AdminService {
   private _adminProfile$: Observable<AdminProfile>;
   private _adminProfile: BehaviorSubject<AdminProfile>;
 
+  private _usersList$: Observable<Array<UserProfile>>;
+  private _usersList: BehaviorSubject<Array<UserProfile>>;
+
   constructor(private router: Router, private http: HttpClient) {
     this._isAdminLoggedIn = new BehaviorSubject<boolean>(false);
     this.isAdminLoggedIn$ = this._isAdminLoggedIn.asObservable();
     this._adminProfile = new BehaviorSubject<AdminProfile>(null);
     this._adminProfile$ = this._adminProfile.asObservable();
+    this._usersList = new BehaviorSubject<Array<UserProfile>>(null);
+    this._usersList$ = this._usersList.asObservable();
     this.isAdminLoggedIn$.subscribe((loggedin) => {
       if (loggedin) {
         this.fetchProfile();
+        this.fetchUsers();
       } else {
         this.removeProfile();
+        this.removeUsers();
       }
     });
   }
@@ -78,8 +86,51 @@ export class AdminService {
     });
   }
 
-  removeProfile() {
+  private removeProfile() {
     this._adminProfile.next(null);
+  }
+
+  getUsers(): Observable<Array<UserProfile>> {
+    return this._usersList$;
+  }
+
+  getUser(id: number): Observable<UserProfile> {
+    return new Observable<UserProfile>((observer) => {
+      this._usersList$.subscribe((users) => {
+        let user = users.find((user) => user.id == id);
+        observer.next(user);
+      });
+    });
+  }
+
+  fetchUsers() {
+    let url = 'http://localhost:8080/admin/users';
+    this.http.get<Array<UserProfile>>(url).subscribe((data) => {
+      if (data) {
+        this._usersList.next(data);
+      }
+    });
+  }
+
+  private removeUsers() {
+    this._usersList.next(null);
+  }
+
+  activateUserCard(uid: number) {
+    let url = 'http://localhost:8080/admin/users/activate-usercard';
+    let data = { uid: uid, activateCard: true };
+    this.http.post<UserProfile>(url, data).subscribe((res) => {
+      if (res.id) {
+        let users = this._usersList.value;
+        users.forEach((user, i) => {
+          if (user.id == res.id) {
+            users[i] = res;
+            return;
+          }
+        });
+        this._usersList.next(users);
+      }
+    });
   }
 }
 

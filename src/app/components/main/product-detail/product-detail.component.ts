@@ -9,19 +9,17 @@ import { Product, ProductsService } from '../../../services/products.service';
   styleUrls: ['./product-detail.component.css'],
 })
 export class ProductDetailComponent implements OnInit {
+  
   product: Product;
-  check: boolean = false;
+
   constructor(
     private productsService: ProductsService,
     private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
-    let pid;
-    this.route.params.subscribe((params) => {
-      pid = +params['id'];
-      this.product = this.productsService.getProduct(pid);
-      this.check = true;
-    });
+    let pid = +this.route.snapshot.params['id'];
+    this.product = this.productsService.getProduct(pid);
   }
+  
 }

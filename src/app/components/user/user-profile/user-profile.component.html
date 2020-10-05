@@ -1,0 +1,48 @@
+<div class="cards" *ngIf="userProfile">
+    <div class="card">
+      <h2>USER DETAILS</h2>
+      <div class="details">
+        <h4>Name:</h4>
+        <p>{{ userProfile.name }}</p>
+      </div>
+      <div class="details">
+        <h4>Username:</h4>
+        <p>{{ userProfile.username }}</p>
+      </div>
+      <div class="details">
+        <h4>Email:</h4>
+        <p>{{ userProfile.email }}</p>
+      </div>
+      <div class="details">
+        <h4>Phone:</h4>
+        <p>{{ userProfile.phone }}</p>
+      </div>
+      <div class="details">
+        <h4>Address:</h4>
+        <p>{{ userProfile.address }}</p>
+      </div>
+    </div>
+    <div class="card">
+      <h2>CARD DETAILS</h2>
+      <div class="details">
+        <h4>Card No:</h4>
+        <p>{{ userProfile.emiCard.cardNo }}</p>
+      </div>
+      <div class="details">
+        <h4>Card Type:</h4>
+        <p>{{ userProfile.emiCard.cardType }}</p>
+      </div>
+      <div class="details" *ngIf="userProfile.emiCard.activated">
+        <h4>Validity:</h4>
+        <p>{{ userProfile.emiCard.validity }}</p>
+      </div>
+      <div class="details">
+        <h4>Remaining Balance:</h4>
+        <p>{{ userProfile.emiCard.balance }} / {{ userProfile.emiCard.limit }}</p>
+      </div>
+      <div class="details" *ngIf="!userProfile.emiCard.activated">
+        <h4>Card Not Activated</h4>
+      </div>
+    </div>
+  </div>
+  

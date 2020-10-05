@@ -20,10 +20,6 @@ export class AdminDashboardComponent implements OnInit, OnDestroy {
     })
   }
 
-  logout(){
-    this.adminService.doLogout();
-  }
-
   ngOnDestroy():void {
     this.adminProfileSubscription.unsubscribe();
   }

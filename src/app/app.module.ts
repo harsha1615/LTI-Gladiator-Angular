@@ -26,6 +26,7 @@ import { AdminDashboardComponent } from './components/admin/admin-dashboard/admi
 import { UserNavbarComponent } from './components/user/user-navbar/user-navbar.component';
 import { AdminNavbarComponent } from './components/admin/admin-navbar/admin-navbar.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { UserProfileComponent } from './components/user/user-profile/user-profile.component';
 
 @NgModule({
   declarations: [
@@ -49,6 +50,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     AdminDashboardComponent,
     UserNavbarComponent,
     AdminNavbarComponent,
+    UserProfileComponent,
   ],
   imports: [
     BrowserModule,

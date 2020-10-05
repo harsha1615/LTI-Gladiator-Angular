@@ -11,17 +11,22 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   userProfile:UserProfile;
   private userProfileSubscription : Subscription;
+  clickedToPay:boolean;
 
   constructor(private userService:UserService) { }
 
   ngOnInit(): void {
-    this.userProfileSubscription = this.userService.getProfile().subscribe( (data) => {
-      this.userProfile = data;
+    this.userProfileSubscription = this.userService.getProfile().subscribe( (user) => {
+      if(user){
+        this.userProfile = user;
+        this.clickedToPay = user.paidForCard
+      }
     });
   }
 
   payForCard(){
     this.userService.payForCard();
+    this.clickedToPay = true;
   }
 
   ngOnDestroy(): void {
