@@ -7,14 +7,29 @@
     <div class="col-2">
       <h1>Product:{{ product.name }}</h1>
       <h3>Cost: ${{ product.cost }}</h3>
-      <select>
-        <option>Select Emi Options</option>
-        <option>3 months</option>
-        <option>6 months</option>
-        <option>9 months</option>
-        <option>12 months</option>
+      <span>EMI Tenure : </span>
+      <select [(ngModel)]="emiTenure">
+        <option value="3" selected>3 months</option>
+        <option value="6">6 months</option>
+        <option value="9">9 months</option>
+        <option value="12">12 months</option>
       </select>
-      <a routerLink="/products" routerLinkActive="active" class="btn">Buy</a>
+      <div>
+        <a class="btn" (click)="buy()">Buy</a>
+      </div>
+      <div *ngIf="isbuyclicked">
+        <div *ngIf="isUserLoggedIn">
+          <div>
+            <h3>Tenure: {{ emiTenure }} Months</h3>
+            <h3>Monthly Emi: ${{ product.cost / emiTenure }}</h3>
+            <a class="btn" (click)="confirmPurchase()">Confirm</a>
+          </div>
+        </div>
+        <div *ngIf="!isUserLoggedIn">
+          <h5>User Not Logged In</h5>
+          <a class="btn" (click)="loginUser()">Login</a>
+        </div>
+      </div>
       <h2>Product Details</h2>
       <br />
       <h3>{{ product.description }}</h3>

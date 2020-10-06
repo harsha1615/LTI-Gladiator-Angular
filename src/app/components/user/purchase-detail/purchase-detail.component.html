@@ -1,1 +1,13 @@
-<p>purchase-detail works!</p>
+<div *ngIf="purchase">
+  <h3>Purchase Details</h3>
+  <div>Product : {{ purchase.product.name }}</div>
+  <div>cost : {{ purchase.price }}</div>
+  <div>date of purchase : {{ purchase.dateTime }}</div>
+  <div>No. of emis paid : {{ purchase.emisPaid }}</div>
+  <div>
+    EMIs paid
+    <div *ngFor="let emi of purchase.emiPayments">
+      {{ emi.emiNo }} : {{ emi.emiAmount }} : {{ emi.dateTime }}
+    </div>
+  </div>
+</div>

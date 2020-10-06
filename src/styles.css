@@ -3,3 +3,20 @@ a {
   text-decoration: none;
   padding: 4px 8px;
 }
+/* You can add global styles to this file, and also import other style files */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+.alert-danger {
+  box-shadow: 0 0 0 1px #e0b4b4 inset, 0 0 0 0 transparent;
+  background-color: #fff6f6;
+  color: #9f3a38;
+  padding: 8px;
+  margin-bottom: 0.5rem;
+  border-radius: 0.28571429rem;
+}

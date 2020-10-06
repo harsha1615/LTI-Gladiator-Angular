@@ -7,6 +7,7 @@ import {
 import { HttpClient } from '@angular/common/http';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { AuthService } from './auth.service';
+import { Product } from './products.service';
 
 @Injectable({
   providedIn: 'root',
@@ -17,14 +18,24 @@ export class UserService {
   userProfile$: Observable<UserProfile>;
   private _userProfile: BehaviorSubject<UserProfile>;
 
-  constructor(private router: Router, private http: HttpClient, private authService:AuthService) {
+  userPurchases$: Observable<Array<Purchase>>;
+  private _userPurchases: BehaviorSubject<Array<Purchase>>;
+
+  constructor(
+    private router: Router,
+    private http: HttpClient,
+    private authService: AuthService
+  ) {
     this._userProfile = new BehaviorSubject<UserProfile>(null);
     this.userProfile$ = this._userProfile.asObservable();
+    this._userPurchases = new BehaviorSubject<Array<Purchase>>(null);
+    this.userPurchases$ = this._userPurchases.asObservable();
     this.authService.isLoggedIn$.subscribe((loggedIn) => {
-      if(loggedIn){
+      if (loggedIn) {
         this._userId = this.authService.getUserId();
         this.fetchProfile();
-      }else{
+        this.fetchPurchases();
+      } else {
         this._userId = null;
         this.removeUserProfile();
       }
@@ -71,10 +82,37 @@ export class UserService {
     }
   }
 
-  private removeUserProfile(){
+  private removeUserProfile() {
     this._userProfile.next(null);
   }
 
+  getPurchases(): Observable<Array<Purchase>> {
+    return this.userPurchases$;
+  }
+
+  getPurchase(id: number): Purchase {
+    let purchases = this._userPurchases.value;
+    return purchases.find((purchase) => purchase.id == id);
+  }
+
+  fetchPurchases() {
+    let url = 'http://localhost:8080/purchases?uid=' + this._userId;
+    this.http.get<Array<Purchase>>(url).subscribe((data) => {
+      this._userPurchases.next(data);
+    });
+  }
+
+  purchaseProduct(pid: number, tenure: number): Observable<any> {
+    let url = 'http://localhost:8080/purchases';
+    let data: PurchaseProduct = {
+      userId: this._userId,
+      productId: pid,
+      emiTenure: tenure,
+    };
+    return this.http.post<any>(url, data);
+  }
+
+  payEmi() {}
 }
 
 export interface UserProfile {
@@ -96,4 +134,29 @@ export interface UserEmiCard {
   validity: string;
   balance: number;
   limit: number;
+}
+
+export interface PurchaseProduct {
+  userId: number;
+  productId: number;
+  emiTenure: number;
+}
+
+export interface Purchase {
+  id: number;
+  dateTime: String;
+  product: Product;
+  price: number;
+  emiTenure: number;
+  emiAmount: number;
+  emisPaid: number;
+  emiPayments: Array<EmiPayment>;
+}
+
+export interface EmiPayment {
+  emiNo: number;
+  emiAmount: number;
+  lateFee: number;
+  totalAmount: number;
+  dateTime: String;
 }

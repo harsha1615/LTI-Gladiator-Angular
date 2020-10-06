@@ -1,1 +1,7 @@
-<p>purchases-list works!</p>
+<div *ngIf="purchases">
+  <div *ngFor="let purchase of purchases">
+    <h3>{{ purchase.product.name }}</h3>
+    <h4>{{ purchase.price }}</h4>
+    <button routerLink="/user/purchases/{{ purchase.id }}">View Details</button>
+  </div>
+</div>
