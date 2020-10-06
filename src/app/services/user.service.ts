@@ -112,7 +112,22 @@ export class UserService {
     return this.http.post<any>(url, data);
   }
 
-  payEmi() {}
+  payEmi(pid: number): Observable<Purchase> {
+    let url = 'http://localhost:8080/pay-emi';
+    let data = { userId: this._userId, purchaseId: pid };
+    return this.http.post<Purchase>(url, data);
+  }
+
+  updatePurchase(updatedPurchase: Purchase) {
+    let purchases = this._userPurchases.value;
+    purchases.forEach((purchase) => {
+      if (purchase.id == updatedPurchase.id) {
+        purchase = updatedPurchase;
+        return;
+      }
+    });
+    this._userPurchases.next(purchases);
+  }
 }
 
 export interface UserProfile {

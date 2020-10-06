@@ -10,4 +10,13 @@
       {{ emi.emiNo }} : {{ emi.emiAmount }} : {{ emi.dateTime }}
     </div>
   </div>
+  <div *ngIf="purchase.emisPaid != purchase.emiTenure">
+    <div>Next EMI:</div>
+    <div>EMI amount : {{ purchase.emiAmount }}</div>
+    <div>late fee : {{ lateFee }}</div>
+    <div>Total amount : {{ purchase.emiAmount + lateFee }}</div>
+    <div>
+      <button (click)="payEmi()">Pay EMI</button>
+    </div>
+  </div>
 </div>

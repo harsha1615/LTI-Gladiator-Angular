@@ -9,6 +9,7 @@ import { Purchase, UserService } from 'src/app/services/user.service';
 })
 export class PurchaseDetailComponent implements OnInit {
   purchase: Purchase;
+  lateFee: number;
 
   constructor(
     private userService: UserService,
@@ -18,7 +19,17 @@ export class PurchaseDetailComponent implements OnInit {
   ngOnInit(): void {
     let pid = +this.route.snapshot.params['id'];
     this.purchase = this.userService.getPurchase(pid);
+    this.lateFee = 0;
+    console.log(this.purchase);
   }
 
-  payEmi() {}
+  payEmi() {
+    this.userService.payEmi(this.purchase.id).subscribe((data) => {
+      if (data.id) {
+        this.userService.updatePurchase(data);
+        this.purchase = data;
+        this.userService.fetchProfile();
+      }
+    });
+  }
 }
