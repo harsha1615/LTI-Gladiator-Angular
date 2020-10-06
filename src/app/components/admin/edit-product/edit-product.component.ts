@@ -50,7 +50,7 @@ export class EditProductComponent implements OnInit {
       description: ['', [Validators.required]],
       originalPrice: ['', [Validators.required]],
       profitPercent: ['', [Validators.required]],
-      finalPrice: ['', [Validators.required]],
+      cost: ['', [Validators.required]],
     });
   }
 

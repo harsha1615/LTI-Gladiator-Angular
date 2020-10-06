@@ -158,5 +158,5 @@ export interface AdminProduct {
   description:string;
   originalPrice:number;
   profitPercent:number;
-  finalPrice:number;
+  cost:number;
 }

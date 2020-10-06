@@ -20,7 +20,6 @@ export class PurchaseDetailComponent implements OnInit {
     let pid = +this.route.snapshot.params['id'];
     this.purchase = this.userService.getPurchase(pid);
     this.lateFee = 0;
-    console.log(this.purchase);
   }
 
   payEmi() {
@@ -29,6 +28,10 @@ export class PurchaseDetailComponent implements OnInit {
         this.userService.updatePurchase(data);
         this.purchase = data;
         this.userService.fetchProfile();
+      } else {
+        let res: any = data;
+        console.log(res.message);
+        alert(res.message);
       }
     });
   }

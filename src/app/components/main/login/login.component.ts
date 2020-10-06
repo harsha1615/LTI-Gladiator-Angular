@@ -33,7 +33,6 @@ export class LoginComponent implements OnInit {
   }
 
   loginCheck() {
-    console.log(this.loginForm);
     if (this.loginForm.valid) {
       this.user = {
         email: this.loginForm.get('email').value,

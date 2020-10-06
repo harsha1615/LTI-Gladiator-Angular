@@ -1,10 +1,8 @@
-import { identifierModuleUrl } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { Product, ProductsService } from '../../../services/products.service';
 import { Router } from '@angular/router';
-import { PurchaseDetailComponent } from '../../user/purchase-detail/purchase-detail.component';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -50,6 +48,7 @@ export class ProductDetailComponent implements OnInit {
         if (data.success) {
           console.log('purchase success');
           alert('purchase success');
+          this.userService.fetchPurchases();
         } else {
           console.log('purchase failed');
           alert('purchase failed');

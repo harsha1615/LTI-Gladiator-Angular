@@ -1,9 +1,5 @@
 import { Injectable } from '@angular/core';
-import {
-  Router,
-  ActivatedRouteSnapshot,
-  RouterStateSnapshot,
-} from '@angular/router';
+import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { AuthService } from './auth.service';
@@ -40,17 +36,6 @@ export class UserService {
         this.removeUserProfile();
       }
     });
-  }
-
-  canActivate(
-    route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot
-  ): boolean | Observable<boolean> | Promise<boolean> {
-    if (this._userId != null) {
-      return true;
-    }
-    this.router.navigate(['login']);
-    return false;
   }
 
   getProfile(): Observable<UserProfile> {
@@ -96,14 +81,14 @@ export class UserService {
   }
 
   fetchPurchases() {
-    let url = 'http://localhost:8080/purchases?uid=' + this._userId;
+    let url = 'http://localhost:8080/user/purchases?uid=' + this._userId;
     this.http.get<Array<Purchase>>(url).subscribe((data) => {
       this._userPurchases.next(data);
     });
   }
 
   purchaseProduct(pid: number, tenure: number): Observable<any> {
-    let url = 'http://localhost:8080/purchases';
+    let url = 'http://localhost:8080/user/purchases';
     let data: PurchaseProduct = {
       userId: this._userId,
       productId: pid,
@@ -113,16 +98,16 @@ export class UserService {
   }
 
   payEmi(pid: number): Observable<Purchase> {
-    let url = 'http://localhost:8080/pay-emi';
+    let url = 'http://localhost:8080/user/pay-emi';
     let data = { userId: this._userId, purchaseId: pid };
     return this.http.post<Purchase>(url, data);
   }
 
   updatePurchase(updatedPurchase: Purchase) {
     let purchases = this._userPurchases.value;
-    purchases.forEach((purchase) => {
+    purchases.forEach((purchase, i) => {
       if (purchase.id == updatedPurchase.id) {
-        purchase = updatedPurchase;
+        purchases[i] = updatedPurchase;
         return;
       }
     });

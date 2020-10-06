@@ -1,6 +1,11 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import {
+  ActivatedRouteSnapshot,
+  Router,
+  RouterStateSnapshot,
+} from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -11,9 +16,20 @@ export class AuthService {
 
   private _userId: number;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private router: Router) {
     this._isLoggedIn = new BehaviorSubject<boolean>(false);
     this.isLoggedIn$ = this._isLoggedIn.asObservable();
+  }
+
+  canActivate(
+    route: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot
+  ): boolean | Observable<boolean> | Promise<boolean> {
+    if (this._userId != null) {
+      return true;
+    }
+    this.router.navigate(['login']);
+    return false;
   }
 
   register(user: UserSignup): Observable<AuthStatus> {

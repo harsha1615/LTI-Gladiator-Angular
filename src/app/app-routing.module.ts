@@ -15,7 +15,7 @@ import { AdminDashboardComponent } from './components/admin/admin-dashboard/admi
 import { UsersListComponent } from './components/admin/users-list/users-list.component';
 import { EditProductComponent } from './components/admin/edit-product/edit-product.component';
 
-import { UserService } from './services/user.service';
+import { AuthService } from './services/auth.service';
 import { AdminService } from './services/admin.service';
 import { UserNavbarComponent } from './components/user/user-navbar/user-navbar.component';
 import { AdminNavbarComponent } from './components/admin/admin-navbar/admin-navbar.component';
@@ -34,7 +34,7 @@ const routes: Routes = [
   },
   {
     path: 'user',
-    canActivate: [UserService],
+    canActivate: [AuthService],
     component: UserNavbarComponent,
     children: [
       { path: '', component: DashboardComponent },

@@ -33,7 +33,7 @@ export class ProductsService {
   }
 
   fetchProducts() {
-    let url = 'http://localhost:8080/product';
+    let url = 'http://localhost:8080/products';
     this.http.get<Array<Product>>(url).subscribe((data) => {
       this._products.next(data);
     });
