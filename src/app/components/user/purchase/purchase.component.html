@@ -1,0 +1,87 @@
+<nav *ngIf="product">
+    <ol class="breadcrumb bg-transparent">
+        <li class="breadcrumb-item">
+            <a href="/products/{{product.id}}" routerLink="/products/{{product.id}}">
+                Back to Product
+            </a>
+        </li>
+    </ol>
+</nav>
+
+<div *ngIf="product" class="container">
+    <h3>Purchase Product</h3>
+
+    <ng-container *ngIf="!purchase">
+        <div class="card">
+            <div class="row no-gutters align-items-center">
+                <div class="col-md">
+                    <img src="{{ product.image }}" class="card-img" style="max-height: 320px; object-fit: contain;"
+                        alt="product_image">
+                </div>
+                <div class="col-md">
+                    <div class="card-body">
+                        <h5 class="card-title">{{product.name}}</h5>
+                        <div class="card-text">Rs. {{product.cost}}</div>
+                        <br>
+                        <div *ngIf="user">
+                            <div class="alert alert-danger" *ngIf="!user.emiCard.activated">Card Not
+                                Activated</div>
+                            <div class="alert alert-danger"
+                                *ngIf="user.emiCard.activated && (user.emiCard.balance<product.cost)">
+                                Not Enough Balance in Card
+                            </div>
+                            <div *ngIf="user.emiCard.activated && (user.emiCard.balance>=product.cost)">
+                                <span>EMI Tenure : </span>
+                                <select [(ngModel)]="emiTenure">
+                                    <option value="3" selected>3 months</option>
+                                    <option value="6">6 months</option>
+                                    <option value="9">9 months</option>
+                                    <option value="12">12 months</option>
+                                </select>
+                                <div *ngIf="emiTenure">Monthly Emi: Rs.{{ monthlyEmi() }}</div>
+                                <br>
+                                <button class="btn btn-primary" (click)="doPurchase()"
+                                    [disabled]="!emiTenure">Purchase</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="my-3">
+            <h4>Description</h4>
+            <div>
+                {{product.description}}
+            </div>
+        </div>
+    </ng-container>
+
+    <ng-container *ngIf="purchase">
+        <div class="card">
+            <div class="row no-gutters align-items-center">
+                <div class="col-md">
+                    <img src="{{ product.image }}" class="card-img" style="max-height: 320px; object-fit: contain;"
+                        alt="product_image">
+                </div>
+                <div class="col-md">
+                    <div class="card-body">
+                        <h5 class="card-title">{{product.name}}</h5>
+                        <div class="card-text">Rs. {{product.cost}}</div>
+                        <br>
+                        <span>EMI Tenure : {{ emiTenure }} </span>
+                        <div *ngIf="emiTenure">Monthly Emi: Rs.{{ monthlyEmi() }}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row my-3">
+            <div class="col">
+                <button class="btn btn-secondary btn-block" (click)="cancelPurchase()">Cancel</button>
+            </div>
+            <div class="col">
+                <button class="btn btn-primary btn-block" (click)="confirmPurchase()">Confirm</button>
+            </div>
+        </div>
+    </ng-container>
+
+</div>

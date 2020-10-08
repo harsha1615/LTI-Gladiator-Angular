@@ -62,7 +62,7 @@ export class AuthService {
 export interface UserSignup {
   name: string;
   username: string;
-  phoneNo: string;
+  phone: string;
   address: string;
   email: string;
   password: string;

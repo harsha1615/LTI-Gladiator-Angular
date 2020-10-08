@@ -15,4 +15,17 @@ export class PurchasesListComponent implements OnInit {
       this.purchases = data;
     });
   }
+
+  emiDue(purchase:Purchase):boolean{
+    let purchaseDate = Date.parse(purchase.dateTime.toString());
+    let presentDate = Date.now();
+    let month = 1000*60*60*24*30;
+    if(purchase.emisPaid == purchase.emiTenure){
+      return false;
+    }
+    if(presentDate > purchaseDate+(month*purchase.emisPaid)){
+      return true;
+    }
+    return false;
+  }
 }

@@ -1,71 +1,37 @@
-<!-----Single Product Details-->
-<div *ngIf="product" class="small-container single-product">
-  <div class="row">
-    <div class="col-2">
-      <img src="{{ product.image }}" width="100%" id="ProductImg" />
-    </div>
-    <div class="col-2">
-      <h1>Product:{{ product.name }}</h1>
-      <h3>Cost: ${{ product.cost }}</h3>
-      <span>EMI Tenure : </span>
-      <select [(ngModel)]="emiTenure">
-        <option value="3" selected>3 months</option>
-        <option value="6">6 months</option>
-        <option value="9">9 months</option>
-        <option value="12">12 months</option>
-      </select>
-      <div>
-        <a class="btn" (click)="buy()">Buy</a>
-      </div>
-      <div *ngIf="isbuyclicked">
-        <div *ngIf="isUserLoggedIn">
-          <div>
-            <h3>Tenure: {{ emiTenure }} Months</h3>
-            <h3>Monthly Emi: ${{ product.cost / emiTenure }}</h3>
-            <a class="btn" (click)="confirmPurchase()">Confirm</a>
+<nav>
+  <ol class="breadcrumb bg-transparent">
+    <li class="breadcrumb-item"><a href="/products" routerLink="/products">Products</a></li>
+    <li class="breadcrumb-item" *ngIf="product" aria-current="page">{{product.id}}</li>
+  </ol>
+</nav>
+
+<div *ngIf="product" class="container">
+  
+  <div>
+    <h3>Product Details</h3>
+    <div class="card">
+      <div class="row no-gutters align-items-center">
+        <div class="col-md">
+          <img src="{{ product.image }}" class="card-img" style="max-height: 320px; object-fit: contain;"
+            alt="product_image">
+        </div>
+        <div class="col-md">
+          <div class="card-body">
+            <h5 class="card-title">{{product.name}}</h5>
+            <div class="card-text">Rs. {{product.cost}}</div>
+            <br>
+            <button class="btn btn-primary" (click)="buy()">Buy Product</button>
           </div>
         </div>
-        <div *ngIf="!isUserLoggedIn">
-          <h5>User Not Logged In</h5>
-          <a class="btn" (click)="loginUser()">Login</a>
-        </div>
       </div>
-      <h2>Product Details</h2>
-      <br />
-      <h3>{{ product.description }}</h3>
     </div>
   </div>
-</div>
-<div class="small-container">
-  <div class="row row-2">
-    <h2>Related Products</h2>
-    <p>View More</p>
-  </div>
-</div>
 
-<div class="row">
-  <div class="col-4">
-    <img src="assets/images/product-5.jpg" />
-    <h4>Nike Shoes</h4>
-
-    <p>$60.00</p>
+  <div class="my-3">
+    <h4>Description</h4>
+    <div>
+      {{product.description}}
+    </div>
   </div>
-  <div class="col-4">
-    <img src="assets/images/product-6.jpg" />
-    <h4>Nike T-shirt</h4>
 
-    <p>$50.00</p>
-  </div>
-  <div class="col-4">
-    <img src="assets/images/product-7.jpg" />
-    <h4>HRX Socks</h4>
-
-    <p>$20.00</p>
-  </div>
-  <div class="col-4">
-    <img src="assets/images/product-8.jpg" />
-    <h4>FOSSIL Watch</h4>
-
-    <p>$50.00</p>
-  </div>
 </div>

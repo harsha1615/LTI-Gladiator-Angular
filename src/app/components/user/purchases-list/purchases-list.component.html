@@ -1,7 +1,32 @@
-<div *ngIf="purchases">
-  <div *ngFor="let purchase of purchases">
-    <h3>{{ purchase.product.name }}</h3>
-    <h4>{{ purchase.price }}</h4>
-    <button routerLink="/user/purchases/{{ purchase.id }}">View Details</button>
+<div class="container p-3" *ngIf="purchases">
+  <h2>All Purchases</h2>
+  <div class="row">
+    <ng-container *ngFor="let purchase of purchases.reverse()">
+      <div class="col-md-6 col-sm-6 my-3">
+        <a routerLink="/user/purchases/{{ purchase.id }}">
+          <div class="card h-100">
+            <div class="row no-gutters">
+              <div class="col-md-4">
+                <img src="{{ purchase.product.image }}" class="card-img" alt="purchase_product_image">
+              </div>
+              <div class="col-md-8">
+                <div class="card-body">
+                  <h5 class="card-title">{{purchase.product.name}}</h5>
+                  <div class="card-text">Rs. {{purchase.price}}</div>
+                  <div>Purchase Date: {{purchase.dateTime | date}}</div>
+                  <br>
+                  <div class="card-text">EMI Amount : {{purchase.emiAmount}} </div>
+                  <div class="card-text">EMI's Paid : {{purchase.emisPaid}}/{{purchase.emiTenure}}</div>
+                  <button *ngIf="emiDue(purchase); else paid" class="btn btn-outline-danger my-3">EMI Due</button>
+                  <ng-template #paid>
+                    <button class="btn btn-outline-success my-3">EMI Paid</button>
+                  </ng-template>
+                </div>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+    </ng-container>
   </div>
 </div>

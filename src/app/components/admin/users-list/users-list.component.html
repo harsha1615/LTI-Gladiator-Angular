@@ -1,26 +1,43 @@
-<div *ngIf="!selectedUid">
-    <div *ngIf="users">
-        <table>
-            <tr>
-                <th>S.No</th>
-                <th>Name</th>
-                <th>username</th>
-                <th>Paid For Card</th>
-                <th>Activated</th>
-                <th>View User</th>
-            </tr>
-            <tr *ngFor="let user of users; index as i">
-                <td>{{i+1}}</td>
-                <td>{{user.name}}</td>
-                <td>{{user.username}}</td>
-                <td>{{user.paidForCard}}</td>
-                <td>{{user.emiCard.activated}}</td>
-                <td><button (click)="selectUser(user.id)">View</button></td>
-            </tr>
-        </table>
-    </div>
-</div>
 <div *ngIf="selectedUid">
-    <a (click)="unselectUser()">back</a>
-    <app-user-details [uid]="selectedUid"></app-user-details>
+    <nav>
+        <ol class="breadcrumb bg-transparent">
+            <li class="breadcrumb-item"><a (click)="unselectUser()">Users</a></li>
+            <li class="breadcrumb-item" aria-current="page">{{selectedUid}}</li>
+        </ol>
+    </nav>
+</div>
+
+<div class="container-md p-3">
+    <div *ngIf="!selectedUid">
+        <h3>Manage Users</h3>
+        <div class="table-responsive" *ngIf="users">
+            <table class="table table-bordered table-striped table-hover">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>S.No</th>
+                        <th>Name</th>
+                        <th>username</th>
+                        <th>Paid For Card</th>
+                        <th>Activated</th>
+                        <th>View User</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let user of users; index as i">
+                        <td>{{i+1}}</td>
+                        <td>{{user.name}}</td>
+                        <td>{{user.username}}</td>
+                        <td>{{user.paidForCard}}</td>
+                        <td>{{user.emiCard.activated}}</td>
+                        <td><button class="btn btn-secondary btn-block" (click)="selectUser(user.id)">View
+                                Details</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div *ngIf="selectedUid">
+        <h3>User Profile</h3>
+        <app-user-details [uid]="selectedUid"></app-user-details>
+    </div>
 </div>

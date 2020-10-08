@@ -10,6 +10,7 @@ import { PageNotFoundComponent } from './components/main/page-not-found/page-not
 import { DashboardComponent } from './components/user/dashboard/dashboard.component';
 import { PurchasesListComponent } from './components/user/purchases-list/purchases-list.component';
 import { PurchaseDetailComponent } from './components/user/purchase-detail/purchase-detail.component';
+import { PurchaseComponent } from './components/user/purchase/purchase.component';
 
 import { AdminDashboardComponent } from './components/admin/admin-dashboard/admin-dashboard.component';
 import { UsersListComponent } from './components/admin/users-list/users-list.component';
@@ -46,6 +47,7 @@ const routes: Routes = [
           { path: ':id', component: PurchaseDetailComponent },
         ],
       },
+      {path:'purchase', component: PurchaseComponent}
     ],
   },
   {

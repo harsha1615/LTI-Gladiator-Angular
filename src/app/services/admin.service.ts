@@ -29,7 +29,7 @@ export class AdminService {
     this.isAdminLoggedIn$ = this._isAdminLoggedIn.asObservable();
     this._adminProfile = new BehaviorSubject<AdminProfile>(null);
     this._adminProfile$ = this._adminProfile.asObservable();
-    this._usersList = new BehaviorSubject<Array<UserProfile>>(null);
+    this._usersList = new BehaviorSubject<Array<UserProfile>>([]);
     this._usersList$ = this._usersList.asObservable();
     this.isAdminLoggedIn$.subscribe((loggedin) => {
       if (loggedin) {
@@ -113,7 +113,7 @@ export class AdminService {
   }
 
   private removeUsers() {
-    this._usersList.next(null);
+    this._usersList.next([]);
   }
 
   activateUserCard(uid: number) {

@@ -1,22 +1,119 @@
-<div *ngIf="purchase">
-  <h3>Purchase Details</h3>
-  <div>Product : {{ purchase.product.name }}</div>
-  <div>cost : {{ purchase.price }}</div>
-  <div>date of purchase : {{ purchase.dateTime }}</div>
-  <div>No. of emis paid : {{ purchase.emisPaid }}</div>
-  <div>
-    EMIs paid
-    <div *ngFor="let emi of purchase.emiPayments">
-      {{ emi.emiNo }} : {{ emi.emiAmount }} : {{ emi.dateTime }}
+<nav>
+  <ol class="breadcrumb bg-transparent">
+    <li class="breadcrumb-item"><a href="/user/purchases" routerLink="/user/purchases">Purchases</a></li>
+    <li class="breadcrumb-item" *ngIf="purchase" aria-current="page">{{purchase.id}}</li>
+  </ol>
+</nav>
+
+<div class="container" *ngIf="purchase">
+
+  <div *ngIf="!payemi">
+
+    <h3>Purchase Details</h3>
+
+    <div class="card">
+      <div class="row no-gutters align-items-center">
+        <div class="col-md">
+          <img src="{{ purchase.product.image }}" class="card-img" style="max-height: 320px; object-fit: contain;"
+            alt="purchase_product_image">
+        </div>
+        <div class="col-md">
+          <div class="card-body">
+            <h5 class="card-title">{{purchase.product.name}}</h5>
+            <div class="card-text">Rs. {{purchase.price}}</div>
+            <div>Purchase Date: {{purchase.dateTime | date}}</div>
+            <br>
+            <div class="card-text">EMI Amount : {{purchase.emiAmount}} </div>
+            <div class="card-text">EMI's Paid : {{purchase.emisPaid}}/{{purchase.emiTenure}}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="my-3 alert alert-danger" *ngIf="emiDue()">
+      <div>EMI Pending</div>
+      <div class="my-2">
+        <div>EMI Amount : {{purchase.emiAmount}}</div>
+        <div>Late Fee : {{lateFee()}}</div>
+      </div>
+      <div class="row">
+        <div class="col-sm-6 h-100">Total Amount : {{purchase.emiAmount + lateFee()}}</div>
+        <div class="col-sm-6 h-100"><button class="btn btn-primary btn-block" (click)="payEmi()">Pay EMI</button></div>
+      </div>
+    </div>
+
+    <div class="my-3">
+      <h4>EMI Payments</h4>
+      <div class="table-responsive">
+        <div *ngIf="purchase.emiPayments.length==0; else table">
+          No Payments Made
+        </div>
+        <ng-template #table>
+          <table class="table table-bordered table-striped table-hover">
+            <thead class="thead-dark">
+              <tr>
+                <th>EMI No</th>
+                <th>EMI Amount</th>
+                <th>Late Fee</th>
+                <th>Total Amount</th>
+                <th>Date</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let payment of purchase.emiPayments; index as i">
+                <td>{{payment.emiNo}}</td>
+                <td>{{payment.emiAmount}}</td>
+                <td>{{payment.lateFee}}</td>
+                <td>{{payment.totalAmount}}</td>
+                <td>{{payment.dateTime | date}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </ng-template>
+      </div>
     </div>
   </div>
-  <div *ngIf="purchase.emisPaid != purchase.emiTenure">
-    <div>Next EMI:</div>
-    <div>EMI amount : {{ purchase.emiAmount }}</div>
-    <div>late fee : {{ lateFee }}</div>
-    <div>Total amount : {{ purchase.emiAmount + lateFee }}</div>
-    <div>
-      <button (click)="payEmi()">Pay EMI</button>
+
+  <div *ngIf="payemi">
+    <h3>Payment Details</h3>
+
+    <div class="card">
+      <table class="table">
+        <tr>
+          <td>Purchase ID :</td>
+          <td>{{purchase.id}}</td>
+        </tr>
+        <tr>
+          <td>Product Name :</td>
+          <td>{{purchase.product.name}}</td>
+        </tr>
+        <tr>
+          <td>EMI No.:</td>
+          <td>{{purchase.emisPaid+1}}</td>
+        </tr>
+        <tr>
+          <td>EMI Amount :</td>
+          <td>Rs.{{purchase.emiAmount}}</td>
+        </tr>
+        <tr>
+          <td>Late Fee :</td>
+          <td>Rs.{{lateFee()}}</td>
+        </tr>
+        <tr>
+          <td>Total Amount :</td>
+          <td>Rs.{{purchase.emiAmount + lateFee()}}</td>
+        </tr>
+      </table>
     </div>
+    <div class="row my-3">
+      <div class="col">
+        <button class="btn btn-secondary btn-block" (click)="cancelPayEmi()">Cancel</button>
+      </div>
+      <div class="col">
+        <button class="btn btn-primary btn-block" (click)="confirmPayEmi()">Confirm</button>
+      </div>
+    </div>
+
   </div>
+
 </div>

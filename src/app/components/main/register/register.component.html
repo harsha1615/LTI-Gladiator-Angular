@@ -39,17 +39,17 @@
         </div>
         <div class="form-group">
           <div class="form">
-            <label for="phoneNo"><b>Phone No.</b></label>
-            <input type="text" placeholder="Enter Mobile Number" formControlName="phoneNo" />
+            <label for="phone"><b>Phone No.</b></label>
+            <input type="text" placeholder="Enter Mobile Number" formControlName="phone" />
             <div *ngIf="
-                  registerForm.get('phoneNo').invalid &&
-                  (registerForm.get('phoneNo').dirty ||
-                    registerForm.get('phoneNo').touched)
+                  registerForm.get('phone').invalid &&
+                  (registerForm.get('phone').dirty ||
+                    registerForm.get('phone').touched)
                 " class="alert alert-danger">
-              <div *ngIf="registerForm.get('phoneNo').errors.required">
+              <div *ngIf="registerForm.get('phone').errors.required">
                 Mobile No. is required.
               </div>
-              <div *ngIf="registerForm.get('phoneNo').errors.patternValidator">
+              <div *ngIf="registerForm.get('phone').errors.patternValidator">
                 Enter a valid Phone No. Format
               </div>
             </div>

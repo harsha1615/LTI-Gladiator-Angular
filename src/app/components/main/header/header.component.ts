@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AdminService } from 'src/app/services/admin.service';
 import { AuthService } from 'src/app/services/auth.service';
 
@@ -12,7 +13,7 @@ export class HeaderComponent implements OnInit {
   isUserLoggedIn:boolean;
   isAdminLoggedIn:boolean;
 
-  constructor(private authService:AuthService, private adminService:AdminService) { }
+  constructor(private authService:AuthService, private adminService:AdminService, private router:Router) { }
 
   ngOnInit(): void {
     this.authService.isLoggedIn$.subscribe((data) => {
@@ -25,10 +26,12 @@ export class HeaderComponent implements OnInit {
 
   userLogout(){
     this.authService.doLogout();
+    this.router.navigate(['login']);
   }
 
   adminLogout(){
     this.adminService.doLogout();
+    this.router.navigate(['login']);
   }
 
 }

@@ -24,6 +24,10 @@ export class EditProductComponent implements OnInit {
     this.getProduct();
   }
 
+  pidChanged(){
+    this.productLoaded = false;
+  }
+
   getProduct() {
     if (this.pid != 0) {
       this.productLoaded = false;
