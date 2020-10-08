@@ -28,6 +28,11 @@ import { AdminNavbarComponent } from './components/admin/admin-navbar/admin-navb
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UserProfileComponent } from './components/user/user-profile/user-profile.component';
 import { PurchaseComponent } from './components/user/purchase/purchase.component';
+import { PopupComponent } from './components/main/popup/popup.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NgxSpinnerModule } from 'ngx-spinner';
+import { MatDialogModule } from '@angular/material/dialog';
+import { UserEmicardComponent } from './components/user/user-emicard/user-emicard.component';
 
 @NgModule({
   declarations: [
@@ -53,6 +58,8 @@ import { PurchaseComponent } from './components/user/purchase/purchase.component
     AdminNavbarComponent,
     UserProfileComponent,
     PurchaseComponent,
+    PopupComponent,
+    UserEmicardComponent,
   ],
   imports: [
     BrowserModule,
@@ -60,6 +67,9 @@ import { PurchaseComponent } from './components/user/purchase/purchase.component
     FormsModule,
     HttpClientModule,
     ReactiveFormsModule,
+    BrowserAnimationsModule,
+    NgxSpinnerModule,
+    MatDialogModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

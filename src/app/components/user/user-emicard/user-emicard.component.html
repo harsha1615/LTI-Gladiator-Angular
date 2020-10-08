@@ -1,0 +1,75 @@
+<ngx-spinner type="line-scale"></ngx-spinner>
+
+<nav>
+    <ol class="breadcrumb bg-transparent">
+        <li class="breadcrumb-item"><a href="/user/dashboard" routerLink="/user/dashboard">Dashboard</a></li>
+        <li class="breadcrumb-item" aria-current="page">EMI Card</li>
+    </ol>
+</nav>
+
+<div class="container">
+    <div *ngIf="user">
+        <div *ngIf="!paycard">
+            <h3>EMI Card Details</h3>
+            <div class="card">
+                <table class="table">
+                    <tr>
+                        <td>Card No </td>
+                        <td>{{user.emiCard.cardNo}}</td>
+                    </tr>
+                    <tr>
+                        <td>Card Type </td>
+                        <td>{{user.emiCard.cardType}}</td>
+                    </tr>
+                    <tr>
+                        <td>Status </td>
+                        <td *ngIf="!user.emiCard.activated">INACTIVE</td>
+                        <td *ngIf="user.emiCard.activated">ACTIVE</td>
+                    </tr>
+                    <tr>
+                        <td>Validity </td>
+                        <td>{{ user.emiCard.validity | date }}</td>
+                    </tr>
+                    <tr>
+                        <td>Balance </td>
+                        <td>Rs.{{user.emiCard.balance}}</td>
+                    </tr>
+                    <tr>
+                        <td>Limit </td>
+                        <td>Rs.{{user.emiCard.limit}}</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="alert alert-danger my-3" *ngIf="!user.paidForCard">
+                <div class="row text-center">
+                    <div class="col">
+                        You have not Paid for the Card
+                    </div>
+                    <div class="col">
+                        <button class="btn btn-primary" (click)="pay()">CLICK TO PAY</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div *ngIf="paycard">
+            <h3>Payment For Card</h3>
+            <div class="card">
+                <table class="table">
+                    <td>Amount</td>
+                    <td>Rs. 100</td>
+                </table>
+            </div>
+            <div class="form-row my-3">
+                <div class="col">
+                    <button class="btn btn-secondary btn-block" (click)="cancelPay()">Cancel</button>
+                </div>
+                <div class="col">
+                    <button class="btn btn-primary btn-block" (click)="confirmPay()">Proceed</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -11,14 +11,14 @@ import { UserProfile } from 'src/app/services/user.service';
 export class UserDetailsComponent implements OnInit {
 
   @Input('uid') uid:number; 
-  userProfile:UserProfile;
+  user:UserProfile;
   private userProfileSubscription : Subscription;
 
   constructor(private adminService:AdminService) { }
 
   ngOnInit(): void {
     this.userProfileSubscription = this.adminService.getUser(this.uid).subscribe( (data) => {
-      this.userProfile = data;
+      this.user = data;
     });
   }
 
@@ -27,7 +27,7 @@ export class UserDetailsComponent implements OnInit {
   }
 
   activateCard(){
-    this.adminService.activateUserCard(this.userProfile.id);
+    this.adminService.activateUserCard(this.user.id);
   }
 
 }

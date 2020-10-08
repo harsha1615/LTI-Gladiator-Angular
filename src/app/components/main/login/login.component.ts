@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { AdminService } from 'src/app/services/admin.service';
 import { AuthService, UserLogin } from '../../../services/auth.service';
+import { PopupComponent } from '../popup/popup.component';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -17,12 +20,15 @@ export class LoginComponent implements OnInit {
     private fb: FormBuilder,
     private authService: AuthService,
     private adminService: AdminService,
-    private router: Router
+    private router: Router,
+    private spinner: NgxSpinnerService,
+    private dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
     this.createLoginForm();
     this.formSubmitted = false;
+    this.spinner.hide();
   }
 
   createLoginForm(): void {
@@ -38,28 +44,25 @@ export class LoginComponent implements OnInit {
         email: this.loginForm.get('email').value,
         password: this.loginForm.get('password').value,
       };
-      if(!this.formSubmitted){
+      if (!this.formSubmitted) {
         this.formSubmitted = true;
-        if(this.user.email == "admin"){
+        this.spinner.show();
+        if (this.user.email == 'admin') {
           this.adminService.login(this.user).subscribe((res) => {
             if (res.success) {
               this.adminService.doLogin(res);
-              this.router.navigate(['admin','dashboard']);
+              this.router.navigate(['admin', 'dashboard']);
             } else {
-              console.log(res.message);
-              alert(res.message);
-              this.formSubmitted = false;
+              this.errorLogin(res);
             }
           });
-        }else{
+        } else {
           this.authService.login(this.user).subscribe((res) => {
             if (res.success) {
               this.authService.doLogin(res);
-              this.router.navigate(['user','dashboard']);
+              this.router.navigate(['user', 'dashboard']);
             } else {
-              console.log(res.message);
-              alert(res.message);
-              this.formSubmitted = false;
+              this.errorLogin(res);
             }
           });
         }
@@ -67,4 +70,15 @@ export class LoginComponent implements OnInit {
     }
   }
 
+  errorLogin(data) {
+    this.spinner.hide();
+    console.log(data.message);
+    this.dialog.open(PopupComponent, {
+      width: '350px',
+      data: {
+        msg: data.message,
+      },
+    });
+    this.formSubmitted = false;
+  }
 }

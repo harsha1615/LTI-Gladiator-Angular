@@ -1,48 +1,40 @@
-<div class="cards" *ngIf="userProfile">
+<nav>
+  <ol class="breadcrumb bg-transparent">
+    <li class="breadcrumb-item"><a href="/user/dashboard" routerLink="/user/dashboard">Dashboard</a></li>
+    <li class="breadcrumb-item" aria-current="page">Profile</li>
+  </ol>
+</nav>
+
+<div class="container">
+  <div *ngIf="user">
+    <h3>User Profile</h3>
     <div class="card">
-      <h2>USER DETAILS</h2>
-      <div class="details">
-        <h4>Name:</h4>
-        <p>{{ userProfile.name }}</p>
-      </div>
-      <div class="details">
-        <h4>Username:</h4>
-        <p>{{ userProfile.username }}</p>
-      </div>
-      <div class="details">
-        <h4>Email:</h4>
-        <p>{{ userProfile.email }}</p>
-      </div>
-      <div class="details">
-        <h4>Phone:</h4>
-        <p>{{ userProfile.phone }}</p>
-      </div>
-      <div class="details">
-        <h4>Address:</h4>
-        <p>{{ userProfile.address }}</p>
-      </div>
-    </div>
-    <div class="card">
-      <h2>CARD DETAILS</h2>
-      <div class="details">
-        <h4>Card No:</h4>
-        <p>{{ userProfile.emiCard.cardNo }}</p>
-      </div>
-      <div class="details">
-        <h4>Card Type:</h4>
-        <p>{{ userProfile.emiCard.cardType }}</p>
-      </div>
-      <div class="details" *ngIf="userProfile.emiCard.activated">
-        <h4>Validity:</h4>
-        <p>{{ userProfile.emiCard.validity }}</p>
-      </div>
-      <div class="details">
-        <h4>Remaining Balance:</h4>
-        <p>{{ userProfile.emiCard.balance }} / {{ userProfile.emiCard.limit }}</p>
-      </div>
-      <div class="details" *ngIf="!userProfile.emiCard.activated">
-        <h4>Card Not Activated</h4>
-      </div>
+      <table class="table">
+        <tr>
+          <td>User ID </td>
+          <td>{{user.id}}</td>
+        </tr>
+        <tr>
+          <td>Name </td>
+          <td>{{user.name}}</td>
+        </tr>
+        <tr>
+          <td>Username </td>
+          <td>{{user.username}}</td>
+        </tr>
+        <tr>
+          <td>Phone </td>
+          <td>{{ user.phone }}</td>
+        </tr>
+        <tr>
+          <td>Email </td>
+          <td>{{user.email}}</td>
+        </tr>
+        <tr>
+          <td>Address </td>
+          <td>{{user.address}}</td>
+        </tr>
+      </table>
     </div>
   </div>
-  
+</div>

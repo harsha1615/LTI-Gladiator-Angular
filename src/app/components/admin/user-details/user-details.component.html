@@ -1,5 +1,51 @@
-<app-user-profile [profile]="userProfile"></app-user-profile>
 
-<div *ngIf="!userProfile.emiCard.activated && userProfile.paidForCard">
-    <button (click)="activateCard()">ACTIVATE EMI CARD</button>
+<h3>User Details</h3>
+<div class="card">
+    <table class="table">
+        <tr>
+            <td>Name </td>
+            <td>{{user.name}}</td>
+        </tr>
+        <tr>
+            <td>Username </td>
+            <td>{{user.username}}</td>
+        </tr>
+        <tr>
+            <td>Card No </td>
+            <td>{{user.emiCard.cardNo}}</td>
+        </tr>
+        <tr>
+            <td>Card Type </td>
+            <td>{{user.emiCard.cardType}}</td>
+        </tr>
+        <tr>
+            <td>Status </td>
+            <td *ngIf="!user.emiCard.activated">INACTIVE</td>
+            <td *ngIf="user.emiCard.activated">ACTIVE</td>
+        </tr>
+        <tr>
+            <td>Validity </td>
+            <td>{{ user.emiCard.validity | date }}</td>
+        </tr>
+        <tr>
+            <td>Balance </td>
+            <td>Rs.{{user.emiCard.balance}}</td>
+        </tr>
+        <tr>
+            <td>Limit </td>
+            <td>Rs.{{user.emiCard.limit}}</td>
+        </tr>
+    </table>
+</div>
+
+
+<div *ngIf="user.paidForCard && !user.emiCard.activated" class="my-3">
+    <div class="row">
+        <div class="col">
+            Activate EMI Card
+        </div>
+        <div class="col">
+            <button (click)="activateCard()" class="btn btn-primary">ACTIVATE EMI CARD</button>
+        </div>
+    </div>
 </div>

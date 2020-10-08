@@ -1,5 +1,15 @@
-<div class="container p-3" *ngIf="purchases">
+<nav>
+  <ol class="breadcrumb bg-transparent">
+      <li class="breadcrumb-item"><a href="/user/dashboard" routerLink="/user/dashboard">Dashboard</a></li>
+      <li class="breadcrumb-item" aria-current="page">Purchases</li>
+  </ol>
+</nav>
+
+<div class="container" *ngIf="purchases">
   <h2>All Purchases</h2>
+  <div *ngIf="purchases.length==0" class="text-center">
+    No Purchases Made
+  </div>
   <div class="row">
     <ng-container *ngFor="let purchase of purchases.reverse()">
       <div class="col-md-6 col-sm-6 my-3">

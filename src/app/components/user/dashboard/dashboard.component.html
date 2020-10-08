@@ -1,6 +1,30 @@
-<div *ngIf="userProfile">
-  <app-user-profile [profile]="userProfile"></app-user-profile>
-  <div *ngIf="!clickedToPay" class="activate-btn">
-    <button (click)="payForCard()">PAY TO ACTIVATE CARD</button>
+<div class="container my-3">
+  <div *ngIf="user">
+    <h2>Hii, {{user.name}}</h2>
+
+    <div class="container my-3">
+      <h3>EMI Card Details</h3>
+      <div *ngIf="!user.emiCard.activated" class="my-3">
+        Card Not Activated
+      </div>
+      <div *ngIf="!user.paidForCard" class="my-3">
+        You haven't paid for the Card <br>
+        <a routerLink="/user/emi-card"><button class="btn btn-primary">Click Here</button></a> to pay
+      </div>
+      <div *ngIf="user.emiCard.activated" class="my-3">
+        Available Balance : {{user.emiCard.balance}}
+      </div>
+      <div *ngIf="user.paidForCard" class="my-3">
+        <a routerLink="/user/emi-card"><button class="btn btn-primary">Click Here</button></a> to view full details
+      </div>
+    </div>
+
+    <div class="container my-3">
+      <h3>Purchases</h3>
+      <div>
+        <a routerLink="/user/purchases"><button class="btn btn-primary">Click Here</button></a> to view your purchases
+      </div>
+    </div>
+
   </div>
 </div>

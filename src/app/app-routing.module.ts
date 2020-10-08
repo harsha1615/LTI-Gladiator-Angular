@@ -20,6 +20,8 @@ import { AuthService } from './services/auth.service';
 import { AdminService } from './services/admin.service';
 import { UserNavbarComponent } from './components/user/user-navbar/user-navbar.component';
 import { AdminNavbarComponent } from './components/admin/admin-navbar/admin-navbar.component';
+import { UserProfileComponent } from './components/user/user-profile/user-profile.component';
+import { UserEmicardComponent } from './components/user/user-emicard/user-emicard.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -40,6 +42,8 @@ const routes: Routes = [
     children: [
       { path: '', component: DashboardComponent },
       { path: 'dashboard', component: DashboardComponent },
+      { path: 'profile', component: UserProfileComponent },
+      { path: 'emi-card', component: UserEmicardComponent },
       {
         path: 'purchases',
         children: [

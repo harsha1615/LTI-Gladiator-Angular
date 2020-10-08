@@ -1,32 +1,29 @@
-<div class="row">
-  <section>
-    <div class="column form">
-      <h1>Login</h1>
-      <div class="login-form">
-        <form [formGroup]="loginForm" (ngSubmit)="loginCheck()">
-          <div class="form">
-            <label for="Email"><b>Email:</b></label>
-            <input type="text" placeholder="Enter Email" name="email" formControlName="email" />
-          </div>
-          <div class="form">
-            <label for="pwd"><b>Password:</b></label>
-            <input type="password" placeholder="Enter password" name="password" formControlName="password" />
-            <a href="#">Forgot Password ?</a>
-          </div>
-          <div class="form">
-            <button type="submit" [disabled]="!loginForm.valid || formSubmitted">Login</button>
-          </div>
-          <div class="form">
-            <div class="routinglink">
-              <h4>
-                New User?
-                <a routerLink="/register">Register here</a>
-              </h4>
-            </div>
-          </div>
-        </form>
+<ngx-spinner type="line-scale"></ngx-spinner>
+
+<div class="container my-3" style="max-width: 500px;">
+  <h3>Login</h3>
+  <form [formGroup]="loginForm" (ngSubmit)="loginCheck()">
+    <div class="form-group">
+      <label for="Email"><b>Email:</b></label>
+      <input class="form-control" type="text" placeholder="Enter Email" name="email" formControlName="email" />
+    </div>
+    <div class="form-group">
+      <label for="pwd"><b>Password:</b></label>
+      <input class="form-control" type="password" placeholder="Enter password" name="password"
+        formControlName="password" />
+    </div>
+    <div class="form-row">
+      <div class="col">
+        <button class="btn btn-secondary btn-block" type="reset">Reset</button>
+      </div>
+      <div class="col">
+        <button class="btn btn-primary btn-block" type="submit"
+          [disabled]="!loginForm.valid || formSubmitted">Login</button>
       </div>
     </div>
-    <div class="column image"></div>
-  </section>
+    <div class="my-3">
+      New User?
+      <a routerLink="/register">Register here</a>
+    </div>
+  </form>
 </div>

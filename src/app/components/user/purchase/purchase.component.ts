@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { Product, ProductsService } from 'src/app/services/products.service';
 import { UserProfile, UserService } from 'src/app/services/user.service';
+import { PopupComponent } from '../../main/popup/popup.component';
 
 @Component({
   selector: 'app-purchase',
@@ -14,18 +17,21 @@ export class PurchaseComponent implements OnInit {
   isProductValid: boolean;
   emiTenure: number;
   purchase: boolean;
-  user:UserProfile;
+  user: UserProfile;
 
   constructor(
     private route: ActivatedRoute,
     private productsService: ProductsService,
     private userService: UserService,
     private router: Router,
+    private spinner: NgxSpinnerService,
+    private dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
     this.isProductValid = true;
     this.purchase = false;
+    this.spinner.hide();
     this.route.queryParams.subscribe((params) => {
       this.productId = params['pid'];
       this.product = this.productsService.getProduct(this.productId);
@@ -37,7 +43,7 @@ export class PurchaseComponent implements OnInit {
     });
     this.userService.getProfile().subscribe((data) => {
       this.user = data;
-    })
+    });
   }
 
   monthlyEmi(): number {
@@ -55,17 +61,32 @@ export class PurchaseComponent implements OnInit {
   }
 
   confirmPurchase() {
+    this.spinner.show();
     this.userService
       .purchaseProduct(this.product.id, this.emiTenure)
       .subscribe((data) => {
-        if (data.success) {
-          this.userService.fetchPurchases();
+        this.spinner.hide();
+        console.log(data);
+        if (data.id) {
+          this.userService.addPurchase(data);
           console.log('purchase success');
-          alert('purchase success');
-          this.router.navigate(['/user/purchases']);
+          let popup = this.dialog.open(PopupComponent, {
+            width: '350px',
+            data: {
+              msg: 'Purchase Success',
+            },
+          });
+          popup.afterClosed().subscribe((_) => {
+            this.router.navigate(['/user/purchases',data.id]);
+          });
         } else {
           console.log('purchase failed');
-          alert('purchase failed');
+          this.dialog.open(PopupComponent, {
+            width: '350px',
+            data: {
+              msg: 'Purchase Failed',
+            },
+          });
         }
       });
   }

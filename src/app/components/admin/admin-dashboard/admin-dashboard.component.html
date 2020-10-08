@@ -1,13 +1,40 @@
-<div *ngIf="adminProfile">
-    <div class="user-profile ui-card details">
-        <strong>ADMIN DETAILS</strong>
-        <div class="field">
-            <label>Name : </label>
-            <span> {{adminProfile.name}} </span>
+<div class="container my-3">
+    <div *ngIf="adminProfile">
+        <h3>Admin Details</h3>
+        <div class="card">
+            <table class="table">
+                <tr>
+                    <td>ID </td>
+                    <td>{{adminProfile.id}}</td>
+                </tr>
+                <tr>
+                    <td>Name </td>
+                    <td>{{adminProfile.name}}</td>
+                </tr>
+                <tr>
+                    <td>Username </td>
+                    <td>{{adminProfile.username}}</td>
+                </tr>
+            </table>
         </div>
-        <div class="field">
-            <label>Username : </label>
-            <span> {{adminProfile.username}} </span>
+    </div>
+
+    <div>
+        <div class="row my-3">
+            <div class="col">
+                Manage Users
+            </div>
+            <div class="col">
+                <a routerLink="/admin/users"><button class="btn btn-primary">Click Here</button></a>
+            </div>
+        </div>
+        <div class="row my-3">
+            <div class="col">
+                Add/Edit Product
+            </div>
+            <div class="col">
+                <a routerLink="/admin/products"><button class="btn btn-primary">Click Here</button></a>
+            </div>
         </div>
     </div>
 </div>

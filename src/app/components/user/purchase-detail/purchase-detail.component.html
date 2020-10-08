@@ -1,3 +1,5 @@
+<ngx-spinner type="line-scale"></ngx-spinner>
+
 <nav>
   <ol class="breadcrumb bg-transparent">
     <li class="breadcrumb-item"><a href="/user/purchases" routerLink="/user/purchases">Purchases</a></li>
@@ -32,6 +34,7 @@
 
     <div class="my-3 alert alert-danger" *ngIf="emiDue()">
       <div>EMI Pending</div>
+      <div>Due Date : {{dueDate() | date }}</div>
       <div class="my-2">
         <div>EMI Amount : {{purchase.emiAmount}}</div>
         <div>Late Fee : {{lateFee()}}</div>

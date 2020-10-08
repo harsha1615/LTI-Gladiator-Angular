@@ -50,16 +50,14 @@ export class UserService {
       .subscribe((data) => this.setUserProfile(data));
   }
 
-  payForCard() {
+  payForCard():Observable<UserProfile> {
     let id = this._userId;
     let url = 'http://localhost:8080/user/pay-for-card';
     let body = { uid: id, pay: true };
-    this.http
-      .post<UserProfile>(url, body)
-      .subscribe((data) => this.setUserProfile(data));
+    return this.http.post<UserProfile>(url, body);
   }
 
-  private setUserProfile(data: UserProfile) {
+  setUserProfile(data: UserProfile) {
     if (data.id) {
       this._userProfile.next(data);
     } else {
@@ -87,7 +85,7 @@ export class UserService {
     });
   }
 
-  purchaseProduct(pid: number, tenure: number): Observable<any> {
+  purchaseProduct(pid: number, tenure: number): Observable<Purchase> {
     let url = 'http://localhost:8080/user/purchases';
     let data: PurchaseProduct = {
       userId: this._userId,
@@ -95,6 +93,12 @@ export class UserService {
       emiTenure: tenure,
     };
     return this.http.post<any>(url, data);
+  }
+
+  addPurchase(purchase: Purchase) {
+    let purchases = this._userPurchases.value;
+    purchases = purchases.concat(purchase);
+    this._userPurchases.next(purchases);
   }
 
   payEmi(pid: number): Observable<Purchase> {

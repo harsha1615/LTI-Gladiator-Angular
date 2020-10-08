@@ -1,6 +1,16 @@
+<div *ngIf="!selectedUid">
+    <nav>
+        <ol class="breadcrumb bg-transparent">
+            <li class="breadcrumb-item"><a routerLink="/admin/dashboard">Admin</a></li>
+            <li class="breadcrumb-item" aria-current="page">Users</li>
+        </ol>
+    </nav>
+</div>
+
 <div *ngIf="selectedUid">
     <nav>
         <ol class="breadcrumb bg-transparent">
+            <li class="breadcrumb-item"><a routerLink="/admin/dashboard">Admin</a></li>
             <li class="breadcrumb-item"><a (click)="unselectUser()">Users</a></li>
             <li class="breadcrumb-item" aria-current="page">{{selectedUid}}</li>
         </ol>
@@ -19,7 +29,7 @@
                         <th>username</th>
                         <th>Paid For Card</th>
                         <th>Activated</th>
-                        <th>View User</th>
+                        <th>View Details</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -37,7 +47,6 @@
         </div>
     </div>
     <div *ngIf="selectedUid">
-        <h3>User Profile</h3>
         <app-user-details [uid]="selectedUid"></app-user-details>
     </div>
 </div>

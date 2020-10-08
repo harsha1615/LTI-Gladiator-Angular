@@ -1,3 +1,5 @@
+<ngx-spinner type="line-scale"></ngx-spinner>
+
 <nav *ngIf="product">
     <ol class="breadcrumb bg-transparent">
         <li class="breadcrumb-item">
@@ -68,7 +70,7 @@
                         <h5 class="card-title">{{product.name}}</h5>
                         <div class="card-text">Rs. {{product.cost}}</div>
                         <br>
-                        <span>EMI Tenure : {{ emiTenure }} </span>
+                        <span>EMI Tenure : {{ emiTenure }} Months </span>
                         <div *ngIf="emiTenure">Monthly Emi: Rs.{{ monthlyEmi() }}</div>
                     </div>
                 </div>
