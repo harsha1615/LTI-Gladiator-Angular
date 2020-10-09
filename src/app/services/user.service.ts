@@ -17,14 +17,10 @@ export class UserService {
   userPurchases$: Observable<Array<Purchase>>;
   private _userPurchases: BehaviorSubject<Array<Purchase>>;
 
-  constructor(
-    private router: Router,
-    private http: HttpClient,
-    private authService: AuthService
-  ) {
+  constructor(private http: HttpClient, private authService: AuthService) {
     this._userProfile = new BehaviorSubject<UserProfile>(null);
     this.userProfile$ = this._userProfile.asObservable();
-    this._userPurchases = new BehaviorSubject<Array<Purchase>>(null);
+    this._userPurchases = new BehaviorSubject<Array<Purchase>>([]);
     this.userPurchases$ = this._userPurchases.asObservable();
     this.authService.isLoggedIn$.subscribe((loggedIn) => {
       if (loggedIn) {
@@ -34,6 +30,7 @@ export class UserService {
       } else {
         this._userId = null;
         this.removeUserProfile();
+        this.removePurchases();
       }
     });
   }
@@ -50,7 +47,7 @@ export class UserService {
       .subscribe((data) => this.setUserProfile(data));
   }
 
-  payForCard():Observable<UserProfile> {
+  payForCard(): Observable<UserProfile> {
     let id = this._userId;
     let url = 'http://localhost:8080/user/pay-for-card';
     let body = { uid: id, pay: true };
@@ -67,6 +64,10 @@ export class UserService {
 
   private removeUserProfile() {
     this._userProfile.next(null);
+  }
+
+  private removePurchases() {
+    this._userPurchases.next([]);
   }
 
   getPurchases(): Observable<Array<Purchase>> {

@@ -7,7 +7,7 @@
       <a class="nav-link" routerLink="/home" routerLinkActive="active">Home</a>
       <a class="nav-link" routerLink="/products" routerLinkActive="active">Products</a>
       <ng-container *ngIf="!isUserLoggedIn && !isAdminLoggedIn">
-        <a class="nav-link" routerLink="/register" routerLinkActive="active">Register</a>
+        <a class="nav-link" routerLink="/register" routerLinkActive="active">Apply For Card</a>
         <a class="nav-link" routerLink="/login" routerLinkActive="active">Login</a>
       </ng-container>
       <li class="nav-item dropdown" *ngIf="isUserLoggedIn">
